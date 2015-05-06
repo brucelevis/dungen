@@ -1,19 +1,22 @@
 CC=clang
 CFLAGS+=-Wall -std=c99
-CFLAGS+=-Wall -std=c99 $(shell pkg-config --cflags sdl2)
-LDFLAGS+= $(shell pkg-config --libs sdl2)
+
+.DEFAULT: demo
+demo: CFLAGS+=$(shell pkg-config --cflags sdl2)
+demo: LDFLAGS+=$(shell pkg-config --libs sdl2)
+demo: libdungen.a demo.o
 
 OBJECTS=utils.o worm.o dungen.o
 
-.DEFAULT: test
-test: $(OBJECTS) test.o
+libdungen.a: $(OBJECTS)
+	ar -cr libdungen.a $(OBJECTS)
 
 debug: CFLAGS += -g
-debug: clean test
+debug: clean demo
 
 release: CFLAGS += -O3 -DNDEBUG
-release: clean test
+release: clean demo
 
 .PHONY: clean
 clean:
-	rm -f test *.o
+	rm -f demo libdungen.a *.o

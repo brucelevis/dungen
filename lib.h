@@ -32,6 +32,7 @@ struct worm {
     struct point dir;
     int ticks;
     int dead;
+    int segment_depth;
     struct worm* segment;
 };
 

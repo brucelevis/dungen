@@ -9,8 +9,9 @@ struct worm *worm_create()
     w->y = 1;
     w->ticks = 0;
     w->dead = 0;
-    w->segment = NULL;
     w->dir = dir_rnd();
+    w->segment_depth = 0;
+    w->segment = NULL;
 
     return w;
 }
@@ -26,6 +27,7 @@ void worm_split(struct worm *w)
         w->segment = worm_create();
         w->segment->x = w->x;
         w->segment->y = w->y;
+        w->segment->segment_depth = w->segment_depth + 1;
     } else {
         worm_split(w->segment);
     }
@@ -57,9 +59,10 @@ void worm_burrow(dg_dungeon d, struct worm *wrm)
 
 void worm_tick(dg_dungeon d, struct worm *w)
 {
-    int generations = d->generations;
-
-    int life_ticks = generations / 3;
+    int depth = w->segment_depth + 1;
+    int life_ticks = 10 + (depth / 2 == 0 ? 6 : 0);
+    int virility   = (depth / 4);
+    int keel       = 6;
 
     w->ticks++;
     if (w->ticks++ >= life_ticks) {
@@ -77,9 +80,6 @@ void worm_tick(dg_dungeon d, struct worm *w)
             x = w->x + w->dir.x;
             y = w->y + w->dir.y;
         }
-
-        int virility = life_ticks / (w->ticks * 1.3);
-        int keel = life_ticks / (w->ticks / 1.1);
 
         // split a new worm segment
         if (w->segment == NULL && rnd_coinflip(virility)) {

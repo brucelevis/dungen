@@ -2,9 +2,9 @@
 #include <stdio.h>
 
 #include "dungen.h"
-#define RECT_SIZE 4
-#define D_WIDTH 180
-#define D_HEIGHT 180
+#define RECT_SIZE 8
+#define D_WIDTH 80
+#define D_HEIGHT 80
 
 int running = 1;
 SDL_Event e;
@@ -37,7 +37,6 @@ void render_cell(int x, int y, enum dg_cell_kind k)
 
 void render_step(dg_dungeon d, int step)
 {
-    printf("step: %i\n", step);
     while (SDL_PollEvent(&e) != 0) {
         if (e.type == SDL_QUIT) {
             running = 0;
@@ -59,14 +58,22 @@ void render_step(dg_dungeon d, int step)
     SDL_Delay(10);
 }
 
-int main() {
+int main(int argc, char **argv) {
+    int d_width = D_WIDTH;
+    int d_height = D_HEIGHT;
+
+    if (argc == 3) {
+        d_width  = atoi(argv[1]);
+        d_height = atoi(argv[2]);
+    }
+
     SDL_Init(SDL_INIT_EVERYTHING);
     window = SDL_CreateWindow(
         "dungen",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        (D_WIDTH * RECT_SIZE),
-        (D_HEIGHT * RECT_SIZE),
+        (d_width * RECT_SIZE),
+        (d_height * RECT_SIZE),
         SDL_WINDOW_SHOWN
     );
 
@@ -74,7 +81,7 @@ int main() {
         window, -1, SDL_RENDERER_ACCELERATED
     );
 
-    (void)dg_generate(D_WIDTH, D_HEIGHT, render_step);
+    (void)dg_generate(d_width, d_height, render_step);
 
     while (running) {
         while (SDL_PollEvent(&e) != 0) {

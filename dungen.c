@@ -8,7 +8,7 @@ dg_dungeon dg_generate(int width, int height, dg_render_step fn)
     struct dgx_dungeon* d = malloc(sizeof(struct dgx_dungeon));
     d->w = width;
     d->h = height;
-    d->generations = ((d->w + d->h) / 2) * 6;
+    d->generations = ((d->w + d->h) / 2) * 10;
     d->cells = malloc(sizeof(struct cell) * (d->w * d->h));
 
     int i = 0;
@@ -26,12 +26,17 @@ dg_dungeon dg_generate(int width, int height, dg_render_step fn)
 
     // generate a worms
     struct worm* w = worm_create();
-    w->x = width >> 1;
-    w->y = height >> 1;
+
+    int start_x = width >> 1;
+    int start_y = height >> 1;
+
+    w->x = start_x;
+    w->y = start_y;
 
     // create a burrow the worm can call home
     //worm_burrow(d, w);
     worm_eat(d, w);
+    worm_split(w);
     worm_split(w);
     worm_split(w);
 
@@ -43,6 +48,16 @@ dg_dungeon dg_generate(int width, int height, dg_render_step fn)
 
         if (fn != NULL) {
             fn(d, steps);
+        }
+
+        struct worm *wrm = w;
+        int dead = w->dead;
+        while (dead && wrm!= NULL) {
+            dead = wrm->dead;
+            wrm = wrm->segment;
+        }
+        if (dead) {
+            worm_split(w);
         }
     }
 
