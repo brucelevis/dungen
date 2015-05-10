@@ -8,7 +8,7 @@ static int dirs[] = {
     -1,  1, 0, 1,  1, 1
 };
 
-void smooth(dg_dungeon d)
+void dg_smooth(dg_dungeon d)
 {
     // TODO store floor cells in list; run this once then run smoothing functions
     for (int y=0; y<d->h; y++) {

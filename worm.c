@@ -102,3 +102,45 @@ void worm_tick(dg_dungeon d, struct worm *w)
         worm_tick(d, w->segment);
     }
 }
+
+void dg_worms(dg_dungeon d)
+{
+    // run the simulation
+    seed_rng();
+
+    struct worm* w = worm_create();
+    w->x = d->w >> 1;
+    w->y = d->h >> 1;
+
+    worm_eat(d, w);
+    worm_split(w);
+    worm_split(w);
+    worm_split(w);
+
+    // run the simulation for N steps
+    int steps = 0;
+
+    while (++steps < d->generations) {
+        worm_tick(d, w);
+
+        if (d->step_fn != NULL) {
+            d->step_fn(d, steps);
+        }
+
+        // check if all worms are dead before the generation is over
+        struct worm *wrm = w;
+        int dead = w->dead;
+        while (dead && wrm!= NULL) {
+            dead = wrm->dead;
+            wrm = wrm->segment;
+        }
+        if (dead) {
+            worm_split(w);
+        }
+    }
+
+    // final step
+    if (d->step_fn != NULL) {
+        d->step_fn(d, steps);
+    }
+}

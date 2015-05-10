@@ -81,7 +81,10 @@ int main(int argc, char **argv) {
         window, -1, SDL_RENDERER_ACCELERATED
     );
 
-    (void)dg_generate(d_width, d_height, render_step);
+    dg_dungeon dungeon = dg_create(d_width, d_height, render_step);
+    dg_worms(dungeon);
+    dg_smooth(dungeon);
+    dg_free(dungeon);
 
     while (running) {
         while (SDL_PollEvent(&e) != 0) {

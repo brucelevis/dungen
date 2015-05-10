@@ -6,7 +6,6 @@
 #include <stdio.h>
 
 #define CELL_AT(d, x, y) (d->cells[x + y * d->w])
-#define MAX(a, b) (a > b ? a : b)
 
 struct point {
     int x;
@@ -23,6 +22,7 @@ struct dgx_dungeon {
     int w;
     int h;
     int generations;
+    dg_render_step step_fn;
     struct cell *cells;
 };
 
@@ -46,6 +46,5 @@ void worm_tick(dg_dungeon d, struct worm *w);
 void worm_burrow(dg_dungeon d, struct worm *w);
 void worm_split(struct worm *w);
 void worm_eat(dg_dungeon d, struct worm *w);
-void smooth(dg_dungeon d);
 
 #endif

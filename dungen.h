@@ -12,7 +12,10 @@ typedef struct dgx_dungeon * dg_dungeon;
 typedef void (*dg_render_step)(dg_dungeon d, int step);
 typedef void (*dg_each_cell)(int x, int y, enum dg_cell_kind k);
 
-dg_dungeon dg_generate(int w, int h, dg_render_step fn);
+dg_dungeon dg_create(int width, int height, dg_render_step step_fn);
 void dg_each(dg_dungeon d, dg_each_cell fn);
+void dg_free(dg_dungeon d);
+void dg_worms(dg_dungeon d);
+void dg_smooth(dg_dungeon d);
 
 #endif
