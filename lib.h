@@ -46,5 +46,6 @@ void worm_tick(dg_dungeon d, struct worm *w);
 void worm_burrow(dg_dungeon d, struct worm *w);
 void worm_split(struct worm *w);
 void worm_eat(dg_dungeon d, struct worm *w);
+void smooth(dg_dungeon d);
 
 #endif

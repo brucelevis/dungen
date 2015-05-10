@@ -17,7 +17,7 @@ dg_dungeon dg_generate(int width, int height, dg_render_step fn)
             struct cell *cell = &d->cells[i++];
             cell->x = x;
             cell->y = y;
-            cell->kind = c_stone;
+            cell->kind = dg_cell_stone;
         }
     }
 
@@ -67,8 +67,12 @@ dg_dungeon dg_generate(int width, int height, dg_render_step fn)
     //    w = w->segment;
     //} while (w != NULL);
 
+    smooth(d);
+
     // final step
-    fn(d, steps);
+    if (fn != NULL) {
+        fn(d, steps);
+    }
 
     // clean up
     return d;
@@ -78,8 +82,7 @@ void dg_each(dg_dungeon d, dg_each_cell fn)
 {
     for (int y=0; y<d->h; y++) {
         for (int x=0; x<d->w; x++) {
-          fn(x, y, CELL_AT(d, x, y).kind);
+            fn(x, y, CELL_AT(d, x, y).kind);
         }
     }
 }
-

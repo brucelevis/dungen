@@ -2,9 +2,9 @@
 #define __DUNGEN_H__
 
 enum dg_cell_kind {
-    c_stone,
-    c_wall,
-    c_floor
+    dg_cell_stone,
+    dg_cell_wall,
+    dg_cell_floor
 };
 
 struct dgx_dungeon;

@@ -1,6 +1,6 @@
 # DUNGEN
 
-C dungeon generation library designed for easy embedding.
+C dungeon generation library designed for easy static embedding.
 
 ``` c
 #include <stdio.h>
@@ -9,13 +9,13 @@ C dungeon generation library designed for easy embedding.
 void print(int x, int y, enum dg_cell_kind k)
 {
     switch(k) {
-        case c_stone:
+        case dg_cell_stone:
             printf(" ");
             break;
-        case c_wall:
+        case dg_cell_wall:
             printf("#");
             break;
-        case c_floor:
+        case dg_cell_floor:
             printf(".");
             break;
     }
@@ -31,7 +31,3 @@ int main()
 }
 ```
 
-``` sh
-$ cc dungen.o demo.c -o demo
-$ ./demo
-```

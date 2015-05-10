@@ -18,7 +18,7 @@ struct worm *worm_create()
 
 void worm_eat(dg_dungeon d, struct worm *w)
 {
-    CELL_AT(d, w->x, w->y).kind = c_floor;
+    CELL_AT(d, w->x, w->y).kind = dg_cell_floor;
 }
 
 void worm_split(struct worm *w)
@@ -52,7 +52,7 @@ void worm_burrow(dg_dungeon d, struct worm *wrm)
     // clear every cell inside the rect
     for (int y=0; y<h; y++) {
         for (int x=0; x<w; x++) {
-            CELL_AT(d, (start_x+x), (start_y+y)).kind = c_floor;
+            CELL_AT(d, (start_x+x), (start_y+y)).kind = dg_cell_floor;
         }
     }
 }

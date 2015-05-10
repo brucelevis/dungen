@@ -21,13 +21,13 @@ void render_cell(int x, int y, enum dg_cell_kind k)
     };
 
     switch (k) {
-        case c_stone:
+        case dg_cell_stone:
             SDL_SetRenderDrawColor(renderer, 32, 32, 32, 255);
             break;
-        case c_wall:
+        case dg_cell_wall:
             SDL_SetRenderDrawColor(renderer, 32, 32, 128, 255);
             break;
-        case c_floor:
+        case dg_cell_floor:
             SDL_SetRenderDrawColor(renderer, 32, 128, 32, 255);
             break;
     }
