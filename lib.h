@@ -35,12 +35,5 @@ struct worm {
 void seed_rng();
 int rnd_range(int min, int max);
 int rnd_coinflip(int n);
-void dir_change(struct point *p);
-struct point dir_rnd();
-struct worm *worm_create();
-void worm_tick(dg_dungeon d, struct worm *w);
-void worm_burrow(dg_dungeon d, struct worm *w);
-void worm_split(struct worm *w);
-void worm_eat(dg_dungeon d, struct worm *w);
 
 #endif

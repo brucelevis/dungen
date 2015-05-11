@@ -2,7 +2,33 @@
 #include "dungen.h"
 #include "lib.h"
 
-struct worm *worm_create()
+static void dir_change(struct point *p)
+{
+    if (p->x == 0) {
+        p->x = rnd_coinflip(0) ? -1 : 1;
+        p->y = 0;
+    } else {
+        p->x = 0;
+        p->y = rnd_coinflip(0) ? -1 : 1;
+    }
+}
+
+static struct point dir_rnd()
+{
+    struct point p;
+
+    if (rnd_coinflip(0)) {
+        p.y = rnd_coinflip(0) ? -1 : 1;
+        p.x = 0;
+    } else {
+        p.x = rnd_coinflip(0) ? -1 : 1;
+        p.y = 0;
+    }
+
+    return p;
+}
+
+static struct worm *worm_create()
 {
     struct worm *w = malloc(sizeof(struct worm));
     w->x = 1;
@@ -16,12 +42,12 @@ struct worm *worm_create()
     return w;
 }
 
-void worm_eat(dg_dungeon d, struct worm *w)
+static void worm_eat(dg_dungeon d, struct worm *w)
 {
     CELL_AT(d, w->x, w->y).kind = dg_cell_floor;
 }
 
-void worm_split(struct worm *w)
+static void worm_split(struct worm *w)
 {
     if (w->segment == NULL) {
         w->segment = worm_create();
@@ -33,7 +59,11 @@ void worm_split(struct worm *w)
     }
 }
 
-void worm_burrow(dg_dungeon d, struct worm *wrm)
+/*
+ * TODO (jdeseno) decide if worms should do this or a 2nd filter
+ *
+
+static void worm_burrow(dg_dungeon d, struct worm *wrm)
 {
     // pick a random size
     int w = rnd_range(4, 12);
@@ -56,8 +86,9 @@ void worm_burrow(dg_dungeon d, struct worm *wrm)
         }
     }
 }
+*/
 
-void worm_tick(dg_dungeon d, struct worm *w)
+static void worm_tick(dg_dungeon d, struct worm *w)
 {
     int depth = w->segment_depth + 1;
     int life_ticks = 10 + (depth / 2 == 0 ? 6 : 0);
