@@ -35,7 +35,25 @@ void dg_each(dg_dungeon d, dg_each_cell fn)
 {
     for (int y=0; y<d->h; y++) {
         for (int x=0; x<d->w; x++) {
-            fn(x, y, CELL_AT(d, x, y).kind);
+            fn(d, x, y, CELL_AT(d, x, y).kind);
         }
+    }
+}
+
+void dg_print(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
+{
+    switch (kind) {
+        case dg_cell_stone:
+            putchar(' ');
+            break;
+        case dg_cell_wall:
+            putchar('#');
+            break;
+        case dg_cell_floor:
+            putchar('.');
+            break;
+    }
+    if (x == (d->w - 1)) {
+        putchar('\n');
     }
 }

@@ -11,7 +11,7 @@ SDL_Event e;
 SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
 
-void render_cell(int x, int y, enum dg_cell_kind k)
+void render_cell(dg_dungeon d, int x, int y, enum dg_cell_kind k)
 {
     SDL_Rect rect = {
         .x = x * RECT_SIZE,

@@ -1,10 +1,6 @@
 #ifndef __LIB_H__
 #define __LIB_H__
 
-// TODO remove
-#include <assert.h>
-#include <stdio.h>
-
 #define CELL_AT(d, x, y) (d->cells[x + y * d->w])
 
 struct point {
