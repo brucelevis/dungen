@@ -5,14 +5,13 @@
 void dg_randomwalk(dg_dungeon d)
 {
     struct point p, dir;
-
     p.x = d->w / 2;
     p.y = d->h / 2;
-
     dir = dir_rnd();
 
-    int steps = 0;
+    seed_rng();
 
+    int steps = 0;
     while (++steps < d->generations)
     {
         dir_change(&dir);
