@@ -2,7 +2,7 @@
 #include "dungen.h"
 #include "lib.h"
 
-void dg_drunkenwalk(dg_dungeon d)
+void dg_randomwalk(dg_dungeon d)
 {
     struct point p, dir;
 

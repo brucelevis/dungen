@@ -18,6 +18,6 @@ void dg_print(dg_dungeon d, int x, int y, enum dg_cell_kind kind);
 void dg_free(dg_dungeon d);
 void dg_worms(dg_dungeon d);
 void dg_smooth(dg_dungeon d);
-void dg_drunkenwalk(dg_dungeon d);
+void dg_randomwalk(dg_dungeon d);
 
 #endif

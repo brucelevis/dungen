@@ -11,6 +11,9 @@ C dungeon generation library designed for easy static embedding.
 The API exposes an opaque dungeon structure that represents a grid and cells.
 Different generation functions can be applied to a dungeon to create customizable effects.
 
+* `dg_worms` lots of random wormy passageways
+* `dg_randomwalk` a random walk, great for generating connected caves
+
 ## Example
 
 ``` c

@@ -6,7 +6,7 @@ demo: LDFLAGS+=$(shell pkg-config --libs sdl2)
 demo: libdungen.a demo.o
 
 OBJECTS=dungen.o \
-	drunkenwalk.o \
+	randomwalk.o \
 	smoother.o \
         utils.o \
 	worm.o
