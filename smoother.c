@@ -2,12 +2,6 @@
 #include "dungen.h"
 #include "lib.h"
 
-static int dirs[] = {
-    -1, -1, 0, -1, 1, -1,
-    -1,  0,        1, 0,
-    -1,  1, 0, 1,  1, 1
-};
-
 void dg_smooth(dg_dungeon d)
 {
     // TODO store floor cells in list; run this once then run smoothing functions
@@ -21,8 +15,8 @@ void dg_smooth(dg_dungeon d)
                 int floors = 0;
 
                 for (int ni=0; ni<8; ni++) {
-                    int nx = x + dirs[ni * 2];
-                    int ny = y + dirs[ni * 2 + 1];
+                    int nx = x + DIRS[ni * 2];
+                    int ny = y + DIRS[ni * 2 + 1];
 
                     if (nx >= 0 && ny >= 0 && nx < d->w && ny < d->h) {
                         struct cell ncell = CELL_AT(d, nx, ny);

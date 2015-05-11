@@ -32,8 +32,17 @@ struct worm {
     struct worm* segment;
 };
 
+static const int DIRS[] =
+{
+    -1, -1, 0, -1, 1, -1,
+    -1,  0,        1,  0,
+    -1,  1, 0, 1,  1,  1
+};
+
 void seed_rng();
 int rnd_range(int min, int max);
 int rnd_coinflip(int n);
+void dir_change(struct point *p);
+struct point dir_rnd();
 
 #endif

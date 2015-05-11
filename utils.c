@@ -24,3 +24,30 @@ int rnd_coinflip(int n)
     return heads;
 }
 
+void dir_change(struct point *p)
+{
+    if (p->x == 0) {
+        p->x = rnd_coinflip(0) ? -1 : 1;
+        p->y = 0;
+    } else {
+        p->x = 0;
+        p->y = rnd_coinflip(0) ? -1 : 1;
+    }
+}
+
+struct point dir_rnd()
+{
+    struct point p;
+
+    if (rnd_coinflip(0)) {
+        p.y = rnd_coinflip(0) ? -1 : 1;
+        p.x = 0;
+    } else {
+        p.x = rnd_coinflip(0) ? -1 : 1;
+        p.y = 0;
+    }
+
+    return p;
+}
+
+
