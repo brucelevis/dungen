@@ -50,4 +50,26 @@ struct point dir_rnd()
     return p;
 }
 
+void draw_line(dg_dungeon d, int x1, int y1, int x2, int y2)
+{
 
+    int xd =  abs(x2 - x1);
+    int yd = -abs(y2 - y1);
+    int x_step = x1 < x2 ? 1 : -1;
+    int y_step = y1 < y2 ? 1 : -1;
+    int error = xd + yd;
+
+    CELL_AT(d, x1, y1).kind = dg_cell_floor;
+
+    while (x1 != x2 || y1 != y2) {
+        if (2 * error - yd > xd - 2 * error) {
+            error += yd;
+            x1 += x_step;
+        } else {
+            error += xd;
+            y1 += y_step;
+        }
+
+        CELL_AT(d, x1, y1).kind = dg_cell_floor;
+    }
+}
