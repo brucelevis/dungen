@@ -22,16 +22,6 @@ struct dgx_dungeon {
     struct cell *cells;
 };
 
-struct worm {
-    int x;
-    int y;
-    struct point dir;
-    int ticks;
-    int dead;
-    int segment_depth;
-    struct worm* segment;
-};
-
 static const int DIRS[] =
 {
     -1, -1, 0, -1, 1, -1,

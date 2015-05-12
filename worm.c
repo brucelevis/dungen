@@ -2,6 +2,16 @@
 #include "dungen.h"
 #include "lib.h"
 
+struct worm {
+    int x;
+    int y;
+    struct point dir;
+    int ticks;
+    int dead;
+    int segment_depth;
+    struct worm* segment;
+};
+
 static struct worm *worm_create()
 {
     struct worm *w = malloc(sizeof(struct worm));
