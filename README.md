@@ -17,6 +17,7 @@ Different generation functions can be applied to a dungeon to create customizabl
 ## Example
 
 ``` c
+#include <stdlib.h>
 #include "dungen.h"
 
 int main()
