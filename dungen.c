@@ -10,6 +10,7 @@ dg_dungeon dg_create(int width, int height, dg_render_step step_fn)
     d->w = width;
     d->h = height;
     d->generations = ((d->w + d->h) / 2) * 10;
+    d->rooms = NULL;
     d->cells = malloc(sizeof(struct cell) * d->w * d->h);
     d->step_fn = step_fn;
 
@@ -37,6 +38,14 @@ void dg_each(dg_dungeon d, dg_each_cell fn)
         for (int x=0; x<d->w; x++) {
             fn(d, x, y, CELL_AT(d, x, y).kind);
         }
+    }
+}
+
+void dg_each_room(dg_dungeon d, dg_each_rect fn)
+{
+    struct rect_l *r = d->rooms;
+    while (r != NULL) {
+        fn(d, r->rect.x, r->rect.y, r->rect.w, r->rect.h);
     }
 }
 

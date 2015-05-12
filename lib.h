@@ -8,6 +8,15 @@ struct point {
     int y;
 };
 
+struct rect {
+    int x, y, w, h;
+};
+
+struct rect_l {
+    struct rect rect;
+    struct rect_l *next;
+};
+
 struct cell {
     int x;
     int y;
@@ -19,6 +28,7 @@ struct dgx_dungeon {
     int h;
     int generations;
     dg_render_step step_fn;
+    struct rect_l* rooms;
     struct cell *cells;
 };
 
