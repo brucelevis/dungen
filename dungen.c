@@ -37,11 +37,16 @@ void dg_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
     CELL_AT(d, x, y).kind = kind;
 }
 
+enum dg_cell_kind dg_get(dg_dungeon d, int x, int y)
+{
+    return CELL_AT(d, x, y).kind;
+}
+
 void dg_each(dg_dungeon d, dg_each_cell fn)
 {
     for (int y=0; y<d->h; y++) {
         for (int x=0; x<d->w; x++) {
-            fn(d, x, y, CELL_AT(d, x, y).kind);
+            fn(d, x, y, dg_get(d, x, y));
         }
     }
 }
