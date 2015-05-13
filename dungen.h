@@ -15,6 +15,7 @@ typedef void (*dg_each_rect)(dg_dungeon d, int x, int y, int w, int h);
 
 dg_dungeon dg_create(int width, int height, dg_render_step step_fn);
 void dg_each(dg_dungeon d, dg_each_cell fn);
+void dg_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind);
 void dg_each_room(dg_dungeon d, dg_each_rect fn);
 void dg_print(dg_dungeon d, int x, int y, enum dg_cell_kind kind);
 void dg_free(dg_dungeon d);

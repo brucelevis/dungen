@@ -32,6 +32,11 @@ void dg_free(dg_dungeon d)
     free(d);
 }
 
+void dg_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
+{
+    CELL_AT(d, x, y).kind = kind;
+}
+
 void dg_each(dg_dungeon d, dg_each_cell fn)
 {
     for (int y=0; y<d->h; y++) {

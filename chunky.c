@@ -61,7 +61,7 @@ static void carve_room(dg_dungeon d, struct rect rect)
                 kind = dg_cell_floor;
             }
 
-            CELL_AT(d, (rect.x+x), (rect.y+y)).kind = kind;
+            dg_set(d, rect.x+x, rect.y+y, kind);
         }
     }
 }

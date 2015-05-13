@@ -28,7 +28,7 @@ static struct worm *worm_create()
 
 static void worm_eat(dg_dungeon d, struct worm *w)
 {
-    CELL_AT(d, w->x, w->y).kind = dg_cell_floor;
+    dg_set(d, w->x, w->y, dg_cell_floor);
 }
 
 static void worm_split(struct worm *w)

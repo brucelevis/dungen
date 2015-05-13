@@ -59,7 +59,7 @@ void draw_line(dg_dungeon d, int x1, int y1, int x2, int y2)
     int y_step = y1 < y2 ? 1 : -1;
     int error = xd + yd;
 
-    CELL_AT(d, x1, y1).kind = dg_cell_floor;
+    dg_set(d, x1, y1, dg_cell_floor);
 
     while (x1 != x2 || y1 != y2) {
         if (2 * error - yd > xd - 2 * error) {

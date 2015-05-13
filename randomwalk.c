@@ -28,7 +28,7 @@ void dg_randomwalk(dg_dungeon d)
         // move & clear
         p.x = x;
         p.y = y;
-        CELL_AT(d, p.x, p.y).kind = dg_cell_floor;
+        dg_set(d, p.x, p.y, dg_cell_floor);
 
         if (d->step_fn != NULL) {
             d->step_fn(d, steps);
