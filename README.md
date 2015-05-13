@@ -13,6 +13,7 @@ Different generation functions can be applied to a dungeon to create customizabl
 
 * `dg_worms` lots of random wormy passageways
 * `dg_randomwalk` a random walk, great for generating connected caves
+* `dg_chunky` many connected adjacent rooms
 
 ## Example
 

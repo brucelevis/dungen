@@ -5,7 +5,8 @@ demo: CFLAGS+=$(shell pkg-config --cflags sdl2)
 demo: LDFLAGS+=$(shell pkg-config --libs sdl2)
 demo: libdungen.a demo.o
 
-OBJECTS=dungen.o \
+OBJECTS=chunky.o \
+	dungen.o \
 	randomwalk.o \
 	smoother.o \
         utils.o \
