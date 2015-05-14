@@ -31,6 +31,7 @@ Different generation functions can be applied to a dungeon to create customizabl
 * `dg_chunky` many unconnected adjacent rooms
 * `dg_smooth` remove artifacts
 * `dg_fill` fill empty rooms
+* `dg_noise` add random cells
 
 ## Example
 
