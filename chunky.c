@@ -81,6 +81,13 @@ static void split(struct rect_t *t)
     if (t->rect.h >= SPLIT_LEN && t->rect.w >= SPLIT_LEN) {
         do_split = 1;
         split_dir = rnd_coinflip(0);
+
+        // permit less uniform cells
+        if ((t->rect.h <= SPLIT_LEN * 1.6 && t->rect.w <= SPLIT_LEN * 1.6) && rnd_coinflip(1)) {
+            do_split = 0;
+        } else if ((t->rect.h <= SPLIT_LEN * 1.4 && t->rect.w <= SPLIT_LEN * 1.4) && rnd_coinflip(0)) {
+            do_split = 0;
+        }
     } else if (t->rect.h >= SPLIT_LEN) {
         do_split = 1;
         split_dir = 0;
