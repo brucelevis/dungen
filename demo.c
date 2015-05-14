@@ -3,8 +3,8 @@
 
 #include "dungen.h"
 #define RECT_SIZE 8
-#define D_WIDTH 80
-#define D_HEIGHT 80
+#define D_WIDTH 50
+#define D_HEIGHT 50
 
 int running = 1;
 SDL_Event e;
@@ -83,6 +83,7 @@ int main(int argc, char **argv) {
     dg_dungeon dungeon = dg_create(d_width, d_height, render_step);
     dg_chunky(dungeon);
     dg_worms(dungeon);
+    dg_fill(dungeon);
     dg_smooth(dungeon);
     dg_free(dungeon);
 

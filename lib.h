@@ -1,7 +1,7 @@
 #ifndef __LIB_H__
 #define __LIB_H__
 
-#define CELL_AT(d, x, y) (d->cells[x + y * d->w])
+#define CELL_AT(d, x, y) (d->cells[(x) + (y) * d->w])
 
 struct point {
     int x;
@@ -47,5 +47,6 @@ void dir_change(struct point *p);
 struct point dir_rnd();
 void draw_line(dg_dungeon d, int x1, int y1, int x2, int y2);
 void add_room(dg_dungeon d, struct rect room);
+void remove_room(dg_dungeon d, struct rect room);
 
 #endif

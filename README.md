@@ -1,10 +1,11 @@
 # DUNGEN
 
-C dungeon generation library designed for easy static embedding.
+The C dungeon generation toolkit
 
 ## Installation
 
-`make libdungen.a` builds a static library you can link against.
+Dungen is designed to be statically embedded.
+`make libdungen.a` builds a standalone library you can link against.
 
 ## API
 
@@ -27,7 +28,9 @@ Different generation functions can be applied to a dungeon to create customizabl
 
 * `dg_worms` lots of random wormy passageways
 * `dg_randomwalk` a random walk, great for generating connected caves
-* `dg_chunky` many connected adjacent rooms
+* `dg_chunky` many unconnected adjacent rooms
+* `dg_smooth` remove artifacts
+* `dg_fill` fill empty rooms
 
 ## Example
 

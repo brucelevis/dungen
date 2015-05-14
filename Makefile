@@ -7,6 +7,7 @@ demo: libdungen.a demo.o
 
 OBJECTS=chunky.o \
 	dungen.o \
+	filler.o \
 	randomwalk.o \
 	smoother.o \
         utils.o \

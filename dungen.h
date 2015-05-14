@@ -24,5 +24,6 @@ void dg_worms(dg_dungeon d);
 void dg_smooth(dg_dungeon d);
 void dg_randomwalk(dg_dungeon d);
 void dg_chunky(dg_dungeon d);
+void dg_fill(dg_dungeon d);
 
 #endif

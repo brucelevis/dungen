@@ -87,7 +87,7 @@ void dg_print(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
 
 void add_room(dg_dungeon d, struct rect room)
 {
-    if (d->rooms  == NULL) {
+    if (d->rooms == NULL) {
         d->rooms = malloc(sizeof(struct rect_l));
         d->rooms->rect = room;
         d->rooms->next = NULL;
@@ -99,5 +99,26 @@ void add_room(dg_dungeon d, struct rect room)
         rl->next = malloc(sizeof(struct rect_l));
         rl->next->rect = room;
         rl->next->next = NULL;
+    }
+}
+
+static int rect_eq(struct rect a, struct rect b)
+{
+    return a.x == b.x && a.y == b.y && a.w == b.w && a.h == b.h;
+}
+
+void remove_room(dg_dungeon d, struct rect room)
+{
+    struct rect_l *rl = d->rooms;
+
+    while (rl != NULL) {
+        if (rect_eq(rl->rect, room)) {
+            if (rl->next) {
+                rl = rl->next;
+                break;
+            }
+        }
+
+        rl = rl->next;
     }
 }
