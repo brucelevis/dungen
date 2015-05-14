@@ -29,13 +29,5 @@ void dg_randomwalk(dg_dungeon d)
         p.x = x;
         p.y = y;
         dg_set(d, p.x, p.y, dg_cell_floor);
-
-        if (d->step_fn != NULL) {
-            d->step_fn(d, steps);
-        }
-    }
-
-    if (d->step_fn != NULL) {
-        d->step_fn(d, steps);
     }
 }

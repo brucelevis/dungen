@@ -26,6 +26,7 @@ struct cell {
 struct dgx_dungeon {
     int w;
     int h;
+    int ticks;
     int generations;
     dg_render_step step_fn;
     struct rect_l* rooms;

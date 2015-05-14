@@ -22,13 +22,13 @@ void render_cell(dg_dungeon d, int x, int y, enum dg_cell_kind k)
 
     switch (k) {
         case dg_cell_stone:
-            SDL_SetRenderDrawColor(renderer, 32, 32, 32, 255);
+            SDL_SetRenderDrawColor(renderer, 12, 12, 12, 255);
             break;
         case dg_cell_wall:
-            SDL_SetRenderDrawColor(renderer, 32, 32, 128, 255);
+            SDL_SetRenderDrawColor(renderer, 32, 128, 32, 255);
             break;
         case dg_cell_floor:
-            SDL_SetRenderDrawColor(renderer, 32, 128, 32, 255);
+            SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
             break;
     }
 
@@ -55,7 +55,6 @@ void render_step(dg_dungeon d, int step)
     dg_each(d, render_cell);
 
     SDL_RenderPresent(renderer);
-    SDL_Delay(10);
 }
 
 int main(int argc, char **argv) {
@@ -82,6 +81,7 @@ int main(int argc, char **argv) {
     );
 
     dg_dungeon dungeon = dg_create(d_width, d_height, render_step);
+    dg_chunky(dungeon);
     dg_worms(dungeon);
     dg_smooth(dungeon);
     dg_free(dungeon);

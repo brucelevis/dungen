@@ -9,6 +9,7 @@ dg_dungeon dg_create(int width, int height, dg_render_step step_fn)
 
     d->w = width;
     d->h = height;
+    d->ticks = 0;
     d->generations = ((d->w + d->h) / 2) * 10;
     d->rooms = NULL;
     d->cells = malloc(sizeof(struct cell) * d->w * d->h);
@@ -34,7 +35,13 @@ void dg_free(dg_dungeon d)
 
 void dg_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
 {
+    d->ticks++;
+
     CELL_AT(d, x, y).kind = kind;
+
+    if (d->step_fn) {
+        d->step_fn(d, d->ticks);
+    }
 }
 
 enum dg_cell_kind dg_get(dg_dungeon d, int x, int y)

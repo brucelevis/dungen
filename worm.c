@@ -138,10 +138,6 @@ void dg_worms(dg_dungeon d)
     while (++steps < d->generations) {
         worm_tick(d, w);
 
-        if (d->step_fn != NULL) {
-            d->step_fn(d, steps);
-        }
-
         // check if all worms are dead before the generation is over
         struct worm *wrm = w;
         int dead = w->dead;
