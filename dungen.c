@@ -76,3 +76,14 @@ void dg_print(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
         putchar('\n');
     }
 }
+
+void add_room(dg_dungeon d, struct rect room)
+{
+    struct rect_l *rl = d->rooms;
+    while (rl->next != NULL) {
+        rl = rl->next;
+    }
+    rl->next = malloc(sizeof(struct rect_l));
+    rl->next->rect = room;
+    rl->next->next = NULL;
+}

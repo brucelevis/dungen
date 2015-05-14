@@ -10,6 +10,14 @@ struct rect_t {
     struct rect_t *left, *right;
 };
 
+static struct rect_t *create_rect_t()
+{
+    struct rect_t *t = malloc(sizeof(struct rect_t));
+    t->left = t->right = NULL;
+
+    return t;
+}
+
 static int rnd_midpoint(int v)
 {
     int split = v / 2;
@@ -83,11 +91,8 @@ static void split(struct rect_t *t)
     }
 
     if (do_split) {
-        t->left = malloc(sizeof(struct rect_t));
-        t->left->left = t->left->right = NULL;
-
-        t->right = malloc(sizeof(struct rect_t));
-        t->right->left = t->right->right = NULL;
+        t->left = create_rect_t();
+        t->right = create_rect_t();
 
         split_rect(split_dir, &t->rect, &t->left->rect, &t->right->rect);
 
@@ -98,31 +103,30 @@ static void split(struct rect_t *t)
 
 static void carve_tree(dg_dungeon d, struct rect_t *t)
 {
-
     if (t->left == NULL && t->right == NULL) {
         carve_room(d, t->rect);
     } else {
-
-        if (t->left != NULL) {
-            carve_tree(d, t->left);
-        }
-
-        if (t->right != NULL) {
-            carve_tree(d, t->right);
-        }
+        if (t->left != NULL) carve_tree(d, t->left);
+        if (t->right != NULL) carve_tree(d, t->right);
     }
 }
 
 static void free_tree(struct rect_t* t)
 {
-    if (t->left != NULL) {
-        free_tree(t->left);
-    }
-    if (t->right != NULL) {
-        free_tree(t->right);
-    }
+    if (t->left != NULL) free_tree(t->left);
+    if (t->right != NULL) free_tree(t->right);
 
     free(t);
+}
+
+static void copy_rooms(dg_dungeon d, struct rect_t *t)
+{
+    if (t->left == NULL && t->right == NULL) {
+        add_room(d, t->rect);
+    } else {
+        if (t->left != NULL) carve_tree(d, t->left);
+        if (t->right != NULL) carve_tree(d, t->right);
+    }
 }
 
 void dg_chunky(dg_dungeon d)
@@ -137,6 +141,6 @@ void dg_chunky(dg_dungeon d)
 
     split(tree);
     carve_tree(d, tree);
-
+    copy_rooms(d, tree);
     free_tree(tree);
 }
