@@ -56,6 +56,7 @@ void dg_each_room(dg_dungeon d, dg_each_rect fn)
     struct rect_l *r = d->rooms;
     while (r != NULL) {
         fn(d, r->rect.x, r->rect.y, r->rect.w, r->rect.h);
+        r = r->next;
     }
 }
 
@@ -79,11 +80,17 @@ void dg_print(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
 
 void add_room(dg_dungeon d, struct rect room)
 {
-    struct rect_l *rl = d->rooms;
-    while (rl->next != NULL) {
-        rl = rl->next;
+    if (d->rooms  == NULL) {
+        d->rooms = malloc(sizeof(struct rect_l));
+        d->rooms->rect = room;
+        d->rooms->next = NULL;
+    } else {
+        struct rect_l *rl = d->rooms;
+        while (rl->next != NULL) {
+            rl = rl->next;
+        }
+        rl->next = malloc(sizeof(struct rect_l));
+        rl->next->rect = room;
+        rl->next->next = NULL;
     }
-    rl->next = malloc(sizeof(struct rect_l));
-    rl->next->rect = room;
-    rl->next->next = NULL;
 }

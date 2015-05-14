@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include "dungen.h"
 #include "lib.h"
 
@@ -124,8 +123,8 @@ static void copy_rooms(dg_dungeon d, struct rect_t *t)
     if (t->left == NULL && t->right == NULL) {
         add_room(d, t->rect);
     } else {
-        if (t->left != NULL) carve_tree(d, t->left);
-        if (t->right != NULL) carve_tree(d, t->right);
+        if (t->left != NULL) copy_rooms(d, t->left);
+        if (t->right != NULL) copy_rooms(d, t->right);
     }
 }
 
