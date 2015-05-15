@@ -82,6 +82,7 @@ int main(int argc, char **argv) {
 
     dg_dungeon dungeon = dg_create(d_width, d_height, render_step);
     dg_chunky(dungeon);
+    dg_shrink(dungeon);
     dg_worms(dungeon);
     dg_fill(dungeon);
     dg_smooth(dungeon);

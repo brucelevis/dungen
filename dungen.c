@@ -122,3 +122,21 @@ void remove_room(dg_dungeon d, struct rect room)
         rl = rl->next;
     }
 }
+
+void carve_room(dg_dungeon d, struct rect rect)
+{
+    enum dg_cell_kind kind;
+
+    for (int y=0; y<rect.h; y++) {
+        for (int x=0; x<rect.w; x++) {
+            if (y == 0 || y == (rect.h - 1) || x == 0 || x == (rect.w - 1)) {
+                kind = dg_cell_wall;
+            } else {
+                kind = dg_cell_floor;
+            }
+
+            dg_set(d, rect.x+x, rect.y+y, kind);
+        }
+    }
+}
+

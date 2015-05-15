@@ -26,5 +26,6 @@ void dg_randomwalk(dg_dungeon d);
 void dg_chunky(dg_dungeon d);
 void dg_fill(dg_dungeon d);
 void dg_noise(dg_dungeon d);
+void dg_shrink(dg_dungeon d);
 
 #endif

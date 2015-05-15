@@ -32,6 +32,7 @@ Different generation functions can be applied to a dungeon to create customizabl
 * `dg_smooth` remove artifacts
 * `dg_fill` fill empty rooms
 * `dg_noise` add random cells
+* `dg_shrink` shrink random rooms
 
 ## Example
 

@@ -10,6 +10,7 @@ OBJECTS=chunky.o \
 	filler.o \
 	noise.o \
 	randomwalk.o \
+	shrinker.o \
 	smoother.o \
         utils.o \
 	worm.o

@@ -56,23 +56,6 @@ static void split_rect(int split_width, struct rect *rect, struct rect *a, struc
     }
 }
 
-static void carve_room(dg_dungeon d, struct rect rect)
-{
-    enum dg_cell_kind kind;
-
-    for (int y=0; y<rect.h; y++) {
-        for (int x=0; x<rect.w; x++) {
-            if (y == 0 || y == (rect.h - 1) || x == 0 || x == (rect.w - 1)) {
-                kind = dg_cell_wall;
-            } else {
-                kind = dg_cell_floor;
-            }
-
-            dg_set(d, rect.x+x, rect.y+y, kind);
-        }
-    }
-}
-
 static void split(struct rect_t *t)
 {
     int do_split = 0;
