@@ -33,6 +33,26 @@ void dg_free(dg_dungeon d)
     free(d);
 }
 
+void dg_reset(dg_dungeon d)
+{
+    d->ticks = 0;
+    dg_clear(d);
+}
+
+void dg_clear(dg_dungeon d)
+{
+    int i = d->w * d->h;
+    while (i--) {
+        d->cells[i].kind = dg_cell_stone;
+    }
+
+    d->ticks++;
+
+    if (d->step_fn) {
+        d->step_fn(d, d->ticks);
+    }
+}
+
 void dg_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
 {
     d->ticks++;

@@ -81,21 +81,34 @@ int main(int argc, char **argv) {
     );
 
     dg_dungeon dungeon = dg_create(d_width, d_height, render_step);
-    dg_chunky(dungeon);
-    dg_shrink(dungeon);
-    dg_worms(dungeon);
-    dg_fill(dungeon);
-    dg_smooth(dungeon);
-    dg_free(dungeon);
+
+    int generating = 1;
 
     while (running) {
+
+        while (generating) {
+            dg_chunky(dungeon);
+            dg_shrink(dungeon);
+            dg_worms(dungeon);
+            dg_fill(dungeon);
+            dg_smooth(dungeon);
+            generating = 0;
+        }
+
         while (SDL_PollEvent(&e) != 0) {
             if (e.type == SDL_QUIT) {
                 running = 0;
             }
+
+            if (e.type == SDL_KEYDOWN) {
+                dg_reset(dungeon);
+                generating = 1;
+            }
         }
+
         SDL_Delay(100);
     }
 
+    dg_free(dungeon);
     SDL_Quit();
 }
