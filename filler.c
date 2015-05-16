@@ -8,7 +8,7 @@ static void fill_disconnected(dg_dungeon d, int x, int y, int w, int h)
 
     for (int yi=0; yi < h; yi++) {
         if (yi == 0 || yi == (h - 1)) {
-            for (int xi=0; xi < w; xi++) {
+            for (int xi=1; xi < w-1; xi++) {
                 if (dg_get(d, x+xi, y+yi) == dg_cell_floor) {
                     connected = 1;
                     goto fill;
