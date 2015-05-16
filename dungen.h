@@ -1,6 +1,10 @@
 #ifndef __DUNGEN_H__
 #define __DUNGEN_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum dg_cell_kind {
     dg_cell_stone,
     dg_cell_wall,
@@ -27,5 +31,10 @@ void dg_chunky(dg_dungeon d);
 void dg_fill(dg_dungeon d);
 void dg_noise(dg_dungeon d);
 void dg_shrink(dg_dungeon d);
+void dg_voronoi(dg_dungeon d);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
