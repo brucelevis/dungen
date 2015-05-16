@@ -16,9 +16,11 @@ Different generation functions can be applied to a dungeon to create customizabl
 
 * `dg_create` create a dungeon to work with
 * `dg_free` cleanup memory used by a dungeon
+* `dg_reset` reset dungeon
 
 #### Working with cells
 
+* `dg_clear` fast clear of all cells
 * `dg_set` set an individual cell
 * `dg_get` get an individual cell
 * `dg_each` iterate over all cells
