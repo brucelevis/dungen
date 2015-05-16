@@ -2,7 +2,7 @@
 #include "dungen.h"
 #include "lib.h"
 
-#define SPLIT_LEN 10
+#define SPLIT_LEN 12
 
 struct rect_t {
     struct rect rect;
