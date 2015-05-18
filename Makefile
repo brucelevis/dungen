@@ -13,6 +13,7 @@ OBJECTS=chunky.o \
 	shrinker.o \
 	smoother.o \
         utils.o \
+	voronoi.o \
 	worm.o
 
 libdungen.a: $(OBJECTS)
