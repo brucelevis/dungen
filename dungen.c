@@ -165,7 +165,7 @@ void dg_err(const char *msg)
 #ifdef DG_ERR
     (void)DG_ERR(msg);
 #else
-    fprintf(stderr, "%s\n", msg);
+    fprintf(stderr, "[dungen] %s\n", msg);
     exit(1);
 #endif
 }
