@@ -35,6 +35,7 @@ void dg_fill(dg_dungeon d);
 void dg_noise(dg_dungeon d);
 void dg_shrink(dg_dungeon d);
 void dg_voronoi(dg_dungeon d);
+void dg_maze(dg_dungeon d);
 
 #ifdef __cplusplus
 }
