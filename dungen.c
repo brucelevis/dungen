@@ -5,14 +5,23 @@
 
 dg_dungeon dg_create(int width, int height, dg_render_step step_fn)
 {
-    struct dgx_dungeon* d = malloc(sizeof(struct dgx_dungeon));
+    struct dgx_dungeon* d;
+
+    if ((d = malloc(sizeof(struct dgx_dungeon))) == NULL) {
+        dg_err("dg_create: out of memory");
+    }
 
     d->w = width;
     d->h = height;
     d->ticks = 0;
     d->generations = ((d->w + d->h) / 2) * 10;
     d->rooms = NULL;
+
     d->cells = malloc(sizeof(struct cell) * d->w * d->h);
+    if (d->cells == NULL) {
+        dg_err("dg_create: out of memory");
+    }
+
     d->step_fn = step_fn;
 
     int i = 0;
@@ -87,7 +96,7 @@ void dg_each_room(dg_dungeon d, dg_each_rect fn)
     }
 }
 
-void dg_print(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
+void dg_print(const dg_dungeon d, int x, int y, enum dg_cell_kind kind)
 {
     switch (kind) {
         case dg_cell_stone:
@@ -109,6 +118,11 @@ void add_room(dg_dungeon d, struct rect room)
 {
     if (d->rooms == NULL) {
         d->rooms = malloc(sizeof(struct rect_l));
+
+        if (d->rooms == NULL) {
+            dg_err("add_room: out of memory");
+        }
+
         d->rooms->rect = room;
         d->rooms->next = NULL;
     } else {
@@ -117,14 +131,19 @@ void add_room(dg_dungeon d, struct rect room)
             rl = rl->next;
         }
         rl->next = malloc(sizeof(struct rect_l));
+
+        if (rl->next == NULL) {
+            dg_err("add_room: out of memory");
+        }
+
         rl->next->rect = room;
         rl->next->next = NULL;
     }
 }
 
-static int rect_eq(struct rect a, struct rect b)
+static int rect_eq(const struct rect *a, const struct rect *b)
 {
-    return a.x == b.x && a.y == b.y && a.w == b.w && a.h == b.h;
+    return a->x == b->x && a->y == b->y && a->w == b->w && a->h == b->h;
 }
 
 void remove_room(dg_dungeon d, struct rect room)
@@ -132,7 +151,7 @@ void remove_room(dg_dungeon d, struct rect room)
     struct rect_l *rl = d->rooms;
 
     while (rl != NULL) {
-        if (rect_eq(rl->rect, room)) {
+        if (rect_eq(&rl->rect, &room)) {
             if (rl->next) {
                 rl = rl->next;
                 break;
@@ -169,3 +188,4 @@ void dg_err(const char *msg)
     exit(1);
 #endif
 }
+

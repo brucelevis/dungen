@@ -14,7 +14,12 @@ struct worm {
 
 static struct worm *worm_create()
 {
-    struct worm *w = malloc(sizeof(struct worm));
+    struct worm *w;
+    
+    if ((w = malloc(sizeof(struct worm))) == NULL) {
+        dg_err("worm_create: out of memory");
+    }
+
     w->x = 1;
     w->y = 1;
     w->ticks = 0;
@@ -26,7 +31,7 @@ static struct worm *worm_create()
     return w;
 }
 
-static void worm_eat(dg_dungeon d, struct worm *w)
+static void worm_eat(dg_dungeon d, const struct worm *w)
 {
     dg_set(d, w->x, w->y, dg_cell_floor);
 }
@@ -120,7 +125,6 @@ static void worm_tick(dg_dungeon d, struct worm *w)
 
 void dg_worms(dg_dungeon d)
 {
-    // run the simulation
     seed_rng();
 
     struct worm* w = worm_create();
@@ -155,3 +159,4 @@ void dg_worms(dg_dungeon d)
         d->step_fn(d, steps);
     }
 }
+

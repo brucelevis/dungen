@@ -11,7 +11,12 @@ struct rect_t {
 
 static struct rect_t *create_rect_t()
 {
-    struct rect_t *t = malloc(sizeof(struct rect_t));
+    struct rect_t *t;
+
+    if ((t = malloc(sizeof(struct rect_t))) == NULL) {
+        dg_err("create_rect_t: out of memory");
+    }
+
     t->left = t->right = NULL;
 
     return t;
@@ -122,7 +127,12 @@ void dg_chunky(dg_dungeon d)
 {
     seed_rng();
 
-    struct rect_t *tree = malloc(sizeof(struct rect_t));
+    struct rect_t *tree;
+
+    if ((tree = malloc(sizeof(struct rect_t))) == NULL) {
+        dg_err("dg_chunky: out of memory");
+    }
+
     tree->left = tree->right = NULL;
     tree->rect.x = tree->rect.y = 0;
     tree->rect.w = d->w;
@@ -133,3 +143,4 @@ void dg_chunky(dg_dungeon d)
     copy_rooms(d, tree);
     free_tree(tree);
 }
+
