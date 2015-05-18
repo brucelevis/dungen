@@ -59,3 +59,4 @@ int main()
 Make will build an animated SDL demo by default.
 
 ![screenshot](https://raw.github.com/jdeseno/dungen/master/screenshot.png)
+![screenshot](https://raw.github.com/jdeseno/dungen/master/screenshot-voronoi.png)
