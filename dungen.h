@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 enum dg_cell_kind {
-    dg_cell_stone,
+    dg_cell_stone = 0,
     dg_cell_wall,
     dg_cell_floor
 };
