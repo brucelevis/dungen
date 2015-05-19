@@ -1,6 +1,5 @@
 #include "dungen.h"
 #include "lib.h"
-#include <stdio.h>
 
 static void fill_disconnected(dg_dungeon d, int x, int y, int w, int h)
 {
