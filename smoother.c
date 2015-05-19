@@ -4,13 +4,13 @@
 
 void dg_smooth(dg_dungeon d)
 {
-    // TODO store floor cells in list; run this once then run smoothing functions
+    /* TODO store floor cells in list; run this once then run smoothing functions */
     for (int y=0; y<d->h; y++) {
         for (int x=0; x<d->w; x++) {
 
             struct cell cell = CELL_AT(d, x, y);
 
-            // remove islands; cells completely surrounded by floors
+            /* remove islands; cells completely surrounded by floors */
             if (cell.kind != dg_cell_floor) {
                 int floors = 0;
 
@@ -24,7 +24,7 @@ void dg_smooth(dg_dungeon d)
                         if (ncell.kind == dg_cell_floor) {
                             floors++;
                         } else {
-                            break; // every cell must be a floor
+                            break; /* every cell must be a floor */
                         }
                     }
                 }

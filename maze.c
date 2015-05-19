@@ -2,7 +2,7 @@
 #include "dungen.h"
 #include "lib.h"
 
-// based on Eller's algorithm, creates decayed looking mazes with open spaces
+/* based on Eller's algorithm, creates decayed looking mazes with open spaces */
 static void spacey_eller(dg_dungeon d)
 {
     enum dg_cell_kind *l, *p;
@@ -20,13 +20,13 @@ static void spacey_eller(dg_dungeon d)
 
     for (int y=0; y<d->h; y++) {
 
-        // draw & copy row
+        /* draw & copy row */
         for (int x=0; x<d->w; x++) {
             dg_set(d, x, y, l[x]);
             p[x] = l[x];
         }
 
-        // adjust row
+        /* adjust row */
         for (int i=0; i<d->w; i++) {
 
             l[i] = dg_cell_floor;

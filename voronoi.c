@@ -48,14 +48,15 @@ void dg_voronoi(dg_dungeon d)
 {
     seed_rng();
 
-    // create centroids
+    /* create centroids */
     int count = d->w * d->h / (SIZE * SIZE);
     count -= count % 2;
     size_t size_v_centroid = sizeof(struct v_centroid);
     struct v_centroid *centroids = malloc(size_v_centroid * count);
+    int i;
 
-    // initialize
-    for (int i=0; i<count; i++) {
+    /* initialize */
+    for (i=0; i<count; i++) {
         struct v_centroid *vc = &centroids[i];
 
         vc->count = 0;
@@ -65,17 +66,17 @@ void dg_voronoi(dg_dungeon d)
         vc->point.y = rnd_range(0, d->h);
     }
 
-    // sort centroids
+    /* sort centroids */
     qsort(centroids, count, size_v_centroid, cmp_centroid);
 
-    // assign nearest cells to centroids
-    // copy each pixel
+    /* - assign nearest cells to centroids
+       - copy each pixel */
     for (int y=0; y<d->h; y++) {
         for (int x=0; x<d->w; x++) {
 
             struct v_centroid *nearest = centroids;
 
-            for (int i=0; i<count; i++) {
+            for (i=0; i<count; i++) {
                 struct v_centroid *vc = &centroids[i];
 
                 int d1 = abs(nearest->point.x - x) + abs(nearest->point.y - y);
@@ -83,7 +84,7 @@ void dg_voronoi(dg_dungeon d)
 
                 if (d1 > d2) {
                     nearest = vc;
-                    // XXX break?
+                    /* XXX break? */
                 }
             }
 
@@ -91,12 +92,12 @@ void dg_voronoi(dg_dungeon d)
         }
     }
 
-    // carve & free memory
+    /* carve & free memory */
     int flip = 0;
     enum dg_cell_kind kind;
     struct v_centroid *vc;
 
-    for (int i=0; i<count; i++) {
+    for (i=0; i<count; i++) {
         vc = &centroids[i];
         kind = (flip ^= 1) ? dg_cell_floor : dg_cell_wall;
 
@@ -104,10 +105,10 @@ void dg_voronoi(dg_dungeon d)
             dg_set(d, vc->points[j].x, vc->points[j].y, kind);
         }
 
-        // free points
+        /* free points */
         free(vc->points);
     }
 
-    // important: points are freed above
+    /* important: points are freed above */
     free(centroids);
 }

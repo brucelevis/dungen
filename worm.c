@@ -94,20 +94,20 @@ static void worm_tick(dg_dungeon d, struct worm *w)
         int x = w->x + w->dir.x;
         int y = w->y + w->dir.y;
 
-        // try a new position until if we are inside the border
+        /* try a new position until if we are inside the border */
         while (x < 1 || y < 1 || x >= (d->w-1) || y >= (d->h-1)) {
             dir_change(&w->dir);
             x = w->x + w->dir.x;
             y = w->y + w->dir.y;
         }
 
-        // split a new worm segment
+        /* split a new worm segment */
         if (w->segment == NULL && rnd_coinflip(virility)) {
-            // worm_burrow(d, w);
+            /* worm_burrow(d, w); */
             worm_split(w);
         }
 
-        // move and eat the cell
+        /* move and eat the cell */
         w->x = x;
         w->y = y;
         worm_eat(d, w);
@@ -117,7 +117,7 @@ static void worm_tick(dg_dungeon d, struct worm *w)
         }
     }
 
-    // tick child segments
+    /* tick child segments */
     if (w->segment != NULL) {
         worm_tick(d, w->segment);
     }
@@ -136,13 +136,13 @@ void dg_worms(dg_dungeon d)
     worm_split(w);
     worm_split(w);
 
-    // run the simulation for N steps
+    /* run the simulation for N steps */
     int steps = 0;
 
     while (++steps < d->generations) {
         worm_tick(d, w);
 
-        // check if all worms are dead before the generation is over
+        /* check if all worms are dead before the generation is over */
         struct worm *wrm = w;
         int dead = w->dead;
         while (dead && wrm!= NULL) {
@@ -154,7 +154,7 @@ void dg_worms(dg_dungeon d)
         }
     }
 
-    // final step
+    /* final step */
     if (d->step_fn != NULL) {
         d->step_fn(d, steps);
     }

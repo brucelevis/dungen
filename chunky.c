@@ -31,7 +31,7 @@ static int rnd_midpoint(int v)
     return rnd_range(split - unit, split + unit * 2);
 }
 
-// split_rect splits with overlap between the new a & b
+/* split_rect splits with overlap between the new a & b */
 static void split_rect(int split_width, struct rect *rect, struct rect *a, struct rect *b)
 {
     if (split_width) {
@@ -70,7 +70,7 @@ static void split(struct rect_t *t)
         do_split = 1;
         split_dir = rnd_coinflip(0);
 
-        // permit less uniform cells
+        /* permit less uniform cells */
         if ((t->rect.h <= SPLIT_LEN * 1.6 && t->rect.w <= SPLIT_LEN * 1.6) && rnd_coinflip(1)) {
             do_split = 0;
         } else if ((t->rect.h <= SPLIT_LEN * 1.4 && t->rect.w <= SPLIT_LEN * 1.4) && rnd_coinflip(0)) {
