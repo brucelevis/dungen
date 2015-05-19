@@ -48,35 +48,6 @@ static void worm_split(struct worm *w)
     }
 }
 
-/*
- * TODO (jdeseno) decide if worms should do this or a 2nd filter
- *
-
-static void worm_burrow(dg_dungeon d, struct worm *wrm)
-{
-    // pick a random size
-    int w = rnd_range(4, 12);
-    int h = rnd_range(4, 12);
-
-    // center the rect on the worm
-    int start_x = wrm->x - (w / 2);
-    int start_y = wrm->y - (h / 2);
-
-    // stay away from the bordering stone
-    if (start_x < 1) { start_x = 1; }
-    if (start_y < 1) { start_y = 1; }
-    if (start_x + w > d->w) { start_x = d->w - (w + 1); }
-    if (start_y + h > d->h) { start_y = d->h - (h + 1); }
-
-    // clear every cell inside the rect
-    for (int y=0; y<h; y++) {
-        for (int x=0; x<w; x++) {
-            CELL_AT(d, (start_x+x), (start_y+y)).kind = dg_cell_floor;
-        }
-    }
-}
-*/
-
 static void worm_tick(dg_dungeon d, struct worm *w)
 {
     int depth = w->segment_depth + 1;
@@ -103,7 +74,6 @@ static void worm_tick(dg_dungeon d, struct worm *w)
 
         /* split a new worm segment */
         if (w->segment == NULL && rnd_coinflip(virility)) {
-            /* worm_burrow(d, w); */
             worm_split(w);
         }
 
