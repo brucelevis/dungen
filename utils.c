@@ -3,9 +3,15 @@
 #include "dungen.h"
 #include "lib.h"
 
+#ifdef __APPLE__
+#define rand arc4random
+#endif
+
 void seed_rng()
 {
+#ifndef __APPLE__
     srand(time(NULL));
+#endif
 }
 
 int rnd_range(int min, int max)
