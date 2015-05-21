@@ -45,6 +45,18 @@ void dg_free(dg_dungeon d)
 void dg_reset(dg_dungeon d)
 {
     d->ticks = 0;
+
+    /* reset rooms */
+    struct rect_l *rn, *rl=d->rooms;
+
+    while (rl != NULL) {
+        rn = rl;
+        rl = rl->next;
+        free(rn);
+    }
+
+    d->rooms = NULL;
+
     dg_clear(d);
 }
 
@@ -190,7 +202,9 @@ void remove_room(dg_dungeon d, struct rect room)
     while (rl != NULL) {
         if (rect_eq(&rl->rect, &room)) {
             if (rl->next) {
+                struct rect_l *tmp = rl;
                 rl = rl->next;
+                free(tmp);
                 break;
             }
         }
