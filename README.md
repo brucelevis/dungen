@@ -33,6 +33,7 @@ Different generation functions can be applied to a dungeon to create customizabl
 * `dg_randomwalk` a random walk, great for generating connected caves
 * `dg_chunky` many unconnected adjacent rooms
 * `dg_smooth` remove artifacts
+* `dg_blur` noise with bias
 * `dg_fill` fill empty rooms
 * `dg_noise` add random cells
 * `dg_shrink` shrink random rooms

@@ -92,6 +92,7 @@ int main(int argc, char **argv) {
             dg_worms(dungeon);
             dg_fill(dungeon);
             dg_smooth(dungeon);
+            dg_blur(dungeon);
             generating = 0;
         }
 

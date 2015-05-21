@@ -69,7 +69,36 @@ static void noise_smooth(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
     dg_set(d, x, y, count_cell_kind(&counts));
 }
 
+/* blur is close to smooth, it's smooth with bias for existing cells */
+static void blur(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
+{
+    /* walls, floors, stones */
+    struct counts counts;
+    counts.floors = counts.walls = counts.stones = 0;
+
+    /* the current cell creates a bias */
+    collect_counts(d, x, y, kind, &counts);
+
+    /* add a random chance the cell will change */
+    int chance = (y > 0 ? 1 : 0)
+               + (y < (d->h - 1) ? 1 : 0)
+               - (x > 0 ? 0 : 1)
+               - (x < (d->w - 1) ? 0 : 1);
+
+    while (chance--) {
+        collect_counts(d, x, y, (enum dg_cell_kind)rnd_range(0, 3), &counts);
+    }
+
+    /* set the cell to the highest count */
+    dg_set(d, x, y, count_cell_kind(&counts));
+}
+
 void dg_smooth(dg_dungeon d)
 {
     dg_each(d, noise_smooth);
+}
+
+void dg_blur(dg_dungeon d)
+{
+    dg_each(d, blur);
 }
