@@ -7,7 +7,7 @@ demo: libdungen.a demo.o
 
 OBJECTS=chunky.o \
 	dungen.o \
-	filler.o \
+	fill.o \
 	maze.o \
 	noise.o \
 	randomwalk.o \

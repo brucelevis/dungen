@@ -45,3 +45,19 @@ void dg_fill(dg_dungeon d)
 {
     dg_each_room(d, fill_disconnected);
 }
+
+void dg_replace_all(dg_dungeon d, enum dg_cell_kind a, enum dg_cell_kind b)
+{
+    int i = d->w * d->h;
+
+    while (i--) {
+        if (d->cells[i].kind == a) {
+            d->cells[i].kind = b;
+        }
+    }
+
+    if (d->step_fn) {
+        d->step_fn(d, d->ticks);
+    }
+}
+

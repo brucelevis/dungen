@@ -35,6 +35,7 @@ Different generation functions can be applied to a dungeon to create customizabl
 * `dg_smooth` remove artifacts
 * `dg_blur` noise with bias
 * `dg_fill` fill empty rooms
+* `dg_replace_all` replace cell type a with cell type b
 * `dg_noise` add random cells
 * `dg_shrink` shrink random rooms
 * `dg_voronoi` randomly filled voronoi cells
