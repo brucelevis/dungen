@@ -96,6 +96,43 @@ void dg_each_room(dg_dungeon d, dg_each_rect fn)
     }
 }
 
+void dg_each_neighbor(dg_dungeon d, int x, int y, void *persist, dg_each_neighbor_cb fn)
+{
+    /* top */
+    if (y > 0) {
+        if (x > 0) {
+            fn(d, x-1, y-1, dg_get(d, x-1, y-1), persist);
+        }
+
+        fn(d, x+1, y-1, dg_get(d, x, y-1), persist);
+
+        if (x < (d->w - 1)) {
+            fn(d, x+1, y-1, dg_get(d, x+1, y-1), persist);
+        }
+    }
+
+    /* middle */
+    if (x > 0) {
+        fn(d, x-1, y, dg_get(d, x-1, y), persist);
+    }
+    if (x < (d->w - 1)) {
+        fn(d, x+1, y, dg_get(d, x+1, y), persist);
+    }
+
+    /* bottom */
+    if (y < d->h) {
+        if (x > 0) {
+            fn(d, x-1, y+1, dg_get(d, x+1, y+1), persist);
+        }
+
+        fn(d, x, y+1, dg_get(d, x, y+1), persist);
+
+        if (x < (d->w - 1)) {
+            fn(d, x+1, y+1, dg_get(d, x+1, y+1), persist);
+        }
+    }
+}
+
 void dg_print(const dg_dungeon d, int x, int y, enum dg_cell_kind kind)
 {
     switch (kind) {

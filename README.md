@@ -25,6 +25,7 @@ Different generation functions can be applied to a dungeon to create customizabl
 * `dg_get` get an individual cell
 * `dg_each` iterate over all cells
 * `dg_each_room` iterate over room rects
+* `dg_each_neighbor` iterate over neighbors of a cell
 
 #### Dungeon generators
 
