@@ -12,7 +12,6 @@ OBJECTS=chunky.o \
 	noise.o \
 	randomwalk.o \
 	shrinker.o \
-	smooth.o \
         utils.o \
 	voronoi.o \
 	worm.o
