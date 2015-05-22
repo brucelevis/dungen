@@ -41,6 +41,7 @@ Different generation functions can be applied to a dungeon to create customizabl
 * `dg_shrink` shrink random rooms
 * `dg_voronoi` randomly filled voronoi cells
 * `dg_forest` carve a maze-like pattern
+* `dg_maze` carve a maze
 
 ## Example
 
