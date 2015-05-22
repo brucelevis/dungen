@@ -94,8 +94,25 @@ void dg_maze(dg_dungeon d)
     }
 
     i = 0;
-    open[i].x = odd(rnd_range(3, d->w-2));
-    open[i].y = odd(rnd_range(3, d->h-2));
+
+    /* find a starting point
+       maze can be quite full, so retry a lot */
+    int tries = 100;
+    while (tries--) {
+        x = odd(rnd_range(3, d->w-2));
+        y = odd(rnd_range(3, d->h-2));
+
+        if (dg_get(d, x, y) != dg_cell_floor) {
+            break;
+        }
+    }
+
+    if (tries) {
+        open[i].x = x;
+        open[i].y = y;
+    } else {
+        dg_err("dg_maze: didn't find an open starting place");
+    }
 
     while (i >= 0) {
         x = open[i].x;
