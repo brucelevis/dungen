@@ -1,11 +1,12 @@
 # DUNGEN
 
-The C dungeon generation toolkit
+PCG dungeon toolkit
 
 ## Installation
 
 Dungen is designed to be statically embedded.
 `make libdungen.a` builds a standalone library you can link against.
+Include dungen.h in your project.
 
 ## API
 

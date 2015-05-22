@@ -3,8 +3,8 @@
 
 #include "dungen.h"
 #define RECT_SIZE 8
-#define D_WIDTH 50
-#define D_HEIGHT 50
+#define D_WIDTH 40
+#define D_HEIGHT 40
 
 int running = 1;
 SDL_Event e;
@@ -22,13 +22,13 @@ void render_cell(dg_dungeon d, int x, int y, enum dg_cell_kind k)
 
     switch (k) {
         case dg_cell_stone:
-            SDL_SetRenderDrawColor(renderer, 12, 12, 12, 255);
+            SDL_SetRenderDrawColor(renderer, 33, 33, 44, 255);
             break;
         case dg_cell_wall:
             SDL_SetRenderDrawColor(renderer, 32, 128, 32, 255);
             break;
         case dg_cell_floor:
-            SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
+            SDL_SetRenderDrawColor(renderer, 66, 66, 66, 255);
             break;
     }
 
@@ -56,6 +56,17 @@ void render_step(dg_dungeon d, int step)
 
     SDL_RenderPresent(renderer);
 }
+
+/* if you'd like to save a screenshot
+static void screenshot(int w, int h, const char *fname)
+{
+
+    SDL_Surface *sshot = SDL_CreateRGBSurface(0, w, h, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+    SDL_RenderReadPixels(renderer, NULL, SDL_PIXELFORMAT_ARGB8888, sshot->pixels, sshot->pitch);
+    SDL_SaveBMP(sshot, fname);
+    SDL_FreeSurface(sshot);
+}
+*/
 
 int main(int argc, char **argv) {
     int d_width = D_WIDTH;
