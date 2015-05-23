@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
             dg_chunky(dungeon);
             dg_shrink(dungeon);
             dg_worms(dungeon);
-            dg_fill(dungeon);
+            dg_fill_rooms(dungeon);
             dg_smooth(dungeon);
             dg_blur(dungeon);
             generating = 0;

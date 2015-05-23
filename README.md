@@ -14,6 +14,8 @@ The API exposes an opaque dungeon structure that represents a grid and cells.
 Different generation functions can be applied to a dungeon to create customizable effects.
 The complete API is documented in the _dungen.h_ file you should include in your project.
 
+Screenshots and numerous examples are available on the [Dungen website](http://lazythunk.com/dungen/)
+
 ``` c
 /**
  * Types
@@ -187,7 +189,7 @@ void dg_voronoi(dg_dungeon d);
 void dg_worms(dg_dungeon d);
 ```
 
-## Example
+## Quick Example
 
 ``` c
 #include <stdlib.h>
@@ -206,5 +208,9 @@ int main()
 
 ## SDL Demo
 
-Make will build an animated SDL demo by default.
+An animated SDL is also included:
+
+``` sh
+make demo
+```
 
