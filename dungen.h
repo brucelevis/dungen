@@ -4,7 +4,7 @@
 /* 0.0.1 */
 #define DUNGEN_VERSION_MAJOR 0
 #define DUNGEN_VERSION_MINOR 0
-#define DUNGEN_VERSION_PATCH 1
+#define DUNGEN_VERSION_PATCH 2
 
 
 #ifdef __cplusplus
