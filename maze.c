@@ -145,3 +145,78 @@ void dg_maze(dg_dungeon d)
 
     free(open);
 }
+
+static void blit_slash(dg_dungeon d, int x, int y, int forward)
+{
+    if (forward) {
+        /*
+        ##..
+        #..#
+        ..##
+       */
+
+        /* top */
+        if (y < d->h) {
+            if (x   < d->w) dg_set(d, x,   y, dg_cell_wall);
+            if (x+1 < d->w) dg_set(d, x+1, y, dg_cell_wall);
+            if (x+2 < d->w) dg_set(d, x+2, y, dg_cell_floor);
+            if (x+3 < d->w) dg_set(d, x+3, y, dg_cell_floor);
+        }
+
+        /* middle */
+        if (y++ < d->h) {
+            if (x   < d->w) dg_set(d, x,   y, dg_cell_wall);
+            if (x+1 < d->w) dg_set(d, x+1, y, dg_cell_floor);
+            if (x+2 < d->w) dg_set(d, x+2, y, dg_cell_floor);
+            if (x+3 < d->w) dg_set(d, x+3, y, dg_cell_wall);
+        }
+
+        /* bottom */
+        if (y++ < d->h) {
+            if (x   < d->w) dg_set(d, x,   y, dg_cell_floor);
+            if (x+1 < d->w) dg_set(d, x+1, y, dg_cell_floor);
+            if (x+2 < d->w) dg_set(d, x+2, y, dg_cell_wall);
+            if (x+3 < d->w) dg_set(d, x+3, y, dg_cell_wall);
+        }
+    } else {
+        /*
+        ..##
+        #..#
+        ##..
+        */
+
+        /* top */
+        if (y < d->h) {
+            if (x   < d->w) dg_set(d, x,   y, dg_cell_floor);
+            if (x+1 < d->w) dg_set(d, x+1, y, dg_cell_floor);
+            if (x+2 < d->w) dg_set(d, x+2, y, dg_cell_wall);
+            if (x+3 < d->w) dg_set(d, x+3, y, dg_cell_wall);
+        }
+
+        /* middle */
+        if (y++ < d->h) {
+            if (x   < d->w) dg_set(d, x,   y, dg_cell_wall);
+            if (x+1 < d->w) dg_set(d, x+1, y, dg_cell_floor);
+            if (x+2 < d->w) dg_set(d, x+2, y, dg_cell_floor);
+            if (x+3 < d->w) dg_set(d, x+3, y, dg_cell_wall);
+        }
+
+        /* bottom */
+        if (y++ < d->h) {
+            if (x   < d->w) dg_set(d, x,   y, dg_cell_wall);
+            if (x+1 < d->w) dg_set(d, x+1, y, dg_cell_wall);
+            if (x+2 < d->w) dg_set(d, x+2, y, dg_cell_floor);
+            if (x+3 < d->w) dg_set(d, x+3, y, dg_cell_floor);
+        }
+    }
+}
+
+void dg_maze_diagonal(dg_dungeon d)
+{
+    for (int y=0; y < d->h; y+=3) {
+        for (int x=0; x < d->w; x+=3) {
+            blit_slash(d, x, y, rnd_coinflip(0));
+        }
+    }
+}
+

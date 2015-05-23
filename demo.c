@@ -22,14 +22,22 @@ void render_cell(dg_dungeon d, int x, int y, enum dg_cell_kind k)
 
     switch (k) {
         case dg_cell_stone:
-            SDL_SetRenderDrawColor(renderer, 33, 33, 44, 255);
-            break;
+            SDL_SetRenderDrawColor(renderer, 66, 66, 66, 255); break;
         case dg_cell_wall:
-            SDL_SetRenderDrawColor(renderer, 32, 128, 32, 255);
-            break;
+            SDL_SetRenderDrawColor(renderer, 32, 128, 32, 255); break;
         case dg_cell_floor:
-            SDL_SetRenderDrawColor(renderer, 66, 66, 66, 255);
-            break;
+            SDL_SetRenderDrawColor(renderer, 33, 33, 44, 255); break;
+    }
+
+    SDL_RenderFillRect(renderer, &rect);
+
+    switch (k) {
+        case dg_cell_stone:
+            SDL_SetRenderDrawColor(renderer, 54, 54, 54, 255); break;
+        case dg_cell_wall:
+            SDL_SetRenderDrawColor(renderer, 20, 116, 20, 255); break;
+        case dg_cell_floor:
+            SDL_SetRenderDrawColor(renderer, 21, 21, 32, 255); break;
     }
 
     SDL_RenderDrawRect(renderer, &rect);
@@ -57,13 +65,13 @@ void render_step(dg_dungeon d, int step)
     SDL_RenderPresent(renderer);
 }
 
-/* if you'd like to save a screenshot
+/* if you'd like to save a screenshot 
 static void screenshot(int w, int h, const char *fname)
 {
 
     SDL_Surface *sshot = SDL_CreateRGBSurface(0, w, h, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
     SDL_RenderReadPixels(renderer, NULL, SDL_PIXELFORMAT_ARGB8888, sshot->pixels, sshot->pitch);
-    SDL_SaveBMP(sshot, fname);
+    SDL_SaveBMP(sshot, "tmp.bmp");
     SDL_FreeSurface(sshot);
 }
 */
@@ -77,13 +85,16 @@ int main(int argc, char **argv) {
         d_height = atoi(argv[2]);
     }
 
+    int w = (d_width * RECT_SIZE);
+    int h = (d_height * RECT_SIZE);
+
     SDL_Init(SDL_INIT_EVERYTHING);
     window = SDL_CreateWindow(
         "dungen",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        (d_width * RECT_SIZE),
-        (d_height * RECT_SIZE),
+        w,
+        h,
         SDL_WINDOW_SHOWN
     );
 
@@ -98,12 +109,8 @@ int main(int argc, char **argv) {
     while (running) {
 
         while (generating) {
-            dg_chunky(dungeon);
-            dg_shrink(dungeon);
-            dg_worms(dungeon);
-            dg_fill_rooms(dungeon);
-            dg_smooth(dungeon);
-            dg_blur(dungeon);
+            dg_maze_diagonal(dungeon);
+
             generating = 0;
         }
 

@@ -61,7 +61,7 @@ void dg_replace_all(dg_dungeon d, enum dg_cell_kind a, enum dg_cell_kind b)
     }
 }
 
-void dg_fill(dg_dungeon d, dg_cell_kind k)
+void dg_fill(dg_dungeon d, enum dg_cell_kind k)
 {
     int i = d->w * d->h;
     while (i--) {

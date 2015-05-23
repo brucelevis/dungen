@@ -110,7 +110,7 @@ void dg_chunky(dg_dungeon d);
  *
  * ignores any existing state
  */
-void dg_fill(dg_dungeon d, dg_cell_kind k);
+void dg_fill(dg_dungeon d, enum dg_cell_kind k);
 
 /** Blur existing cells
  *
@@ -149,6 +149,12 @@ void dg_life(dg_dungeon d);
  * doesn't carve through cells of dg_cell_floor
  */
 void dg_maze(dg_dungeon d);
+
+/** Carve a maze composed of random diagonal passages
+ *
+ * ignores existing state
+ */
+void dg_maze_diagonal(dg_dungeon d);
 
 /** Random cell noise
  *
