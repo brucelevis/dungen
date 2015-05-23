@@ -41,7 +41,7 @@ fill:
     }
 }
 
-void dg_fill(dg_dungeon d)
+void dg_fill_rooms(dg_dungeon d)
 {
     dg_each_room(d, fill_disconnected);
 }
