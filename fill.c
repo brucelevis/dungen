@@ -61,3 +61,17 @@ void dg_replace_all(dg_dungeon d, enum dg_cell_kind a, enum dg_cell_kind b)
     }
 }
 
+void dg_fill(dg_dungeon d, dg_cell_kind k)
+{
+    int i = d->w * d->h;
+    while (i--) {
+        d->cells[i].kind = k;
+    }
+
+    d->ticks++;
+
+    if (d->step_fn) {
+        d->step_fn(d, d->ticks);
+    }
+}
+

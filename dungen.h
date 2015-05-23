@@ -57,9 +57,6 @@ dg_dungeon dg_create(int width, int height, dg_render_step step_fn);
 /** Reset all information in a dungeon (making it reusable) */
 void dg_reset(dg_dungeon d);
 
-/** Clear a dungeon, does not reset any existing state (rooms) */
-void dg_clear(dg_dungeon d);
-
 /** Free memory used by a dungeon */
 void dg_free(dg_dungeon d);
 
@@ -108,6 +105,12 @@ void dg_each_neighbor(dg_dungeon d, int x, int y, void *persist, dg_each_neighbo
  * ignores any existing state
  */
 void dg_chunky(dg_dungeon d);
+
+/** Fill with tile
+ *
+ * ignores any existing state
+ */
+void dg_fill(dg_dungeon d, dg_cell_kind k);
 
 /** Blur existing cells
  *

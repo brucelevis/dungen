@@ -57,21 +57,7 @@ void dg_reset(dg_dungeon d)
 
     d->rooms = NULL;
 
-    dg_clear(d);
-}
-
-void dg_clear(dg_dungeon d)
-{
-    int i = d->w * d->h;
-    while (i--) {
-        d->cells[i].kind = dg_cell_stone;
-    }
-
-    d->ticks++;
-
-    if (d->step_fn) {
-        d->step_fn(d, d->ticks);
-    }
+    dg_fill(d, dg_cell_stone);
 }
 
 void dg_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
