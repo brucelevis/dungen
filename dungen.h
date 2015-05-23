@@ -1,6 +1,12 @@
 #ifndef __DUNGEN_H__
 #define __DUNGEN_H__
 
+/* 0.0.1 */
+#define DUNGEN_VERSION_MAJOR 0
+#define DUNGEN_VERSION_MINOR 0
+#define DUNGEN_VERSION_PATCH 1
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -124,6 +130,16 @@ void dg_fill_rooms(dg_dungeon d);
  */
 void dg_forest(dg_dungeon d);
 
+/** Game of life
+ *
+ * Apply the rules for a single turn of the game of life.
+ * dg_cell_floor is an alive cell and other are dead.
+ *
+ * dependent on existing state:
+ * cells of dg_cell_floor should exist first
+ */
+void dg_life(dg_dungeon d);
+
 /** Carve a maze
  *
  * affected by existing state:
@@ -181,3 +197,4 @@ void dg_worms(dg_dungeon d);
 #endif
 
 #endif
+
