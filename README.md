@@ -12,9 +12,13 @@ Include dungen.h in your project.
 
 The API exposes an opaque dungeon structure that represents a grid and cells.
 Different generation functions can be applied to a dungeon to create customizable effects.
-The complete API is documented in the _dungen.h_ file you should include in your project.
+
+This is a single-file API, the complete documentation is available inside the comments
+of _dungen.h_ wich you should include in your project.
 
 Screenshots and numerous examples are available on the [Dungen website](http://lazythunk.com/dungen/)
+
+## `dungen.h`
 
 ``` c
 /**
