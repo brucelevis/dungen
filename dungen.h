@@ -110,7 +110,13 @@ void dg_chunky(dg_dungeon d);
  *
  * ignores any existing state
  */
-void dg_fill(dg_dungeon d, enum dg_cell_kind k);
+void dg_fill(dg_dungeon d, enum dg_cell_kind fill);
+
+/** Fill the bordering tiles of a rectangle
+ *
+ * ignores any existing state
+ */
+void dg_fill_border(dg_dungeon d, int x, int y, int w, int h, enum dg_cell_kind fill);
 
 /** Blur existing cells
  *

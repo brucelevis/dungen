@@ -2,6 +2,7 @@
 #include "dungen.h"
 #include "lib.h"
 
+#define MIN_ROOM_SIZE 6
 #define SPLIT_LEN 12
 
 struct rect_t {
@@ -22,7 +23,7 @@ static struct rect_t *create_rect_t()
     return t;
 }
 
-static int rnd_midpoint(int v)
+static inline int rnd_midpoint(int v)
 {
     int split = v / 2;
     int unit = v / SPLIT_LEN;
@@ -142,5 +143,25 @@ void dg_chunky(dg_dungeon d)
     carve_tree(d, tree);
     copy_rooms(d, tree);
     free_tree(tree);
+}
+
+void dg_shrink(dg_dungeon d)
+{
+    struct rect_l *rooms=d->rooms;
+    struct rect *r;
+
+    while (rooms != NULL) {
+        r = &rooms->rect;
+
+        while (r->w > MIN_ROOM_SIZE && r->h > MIN_ROOM_SIZE && rnd_coinflip(0)) {
+            r->x++;
+            r->y++;
+            r->w -= 2;
+            r->h -= 2;
+            dg_fill_border(d, r->x, r->y, r->w, r->h, dg_cell_wall);
+        }
+
+        rooms = rooms->next;
+    }
 }
 

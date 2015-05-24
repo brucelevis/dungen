@@ -1,13 +1,12 @@
 CFLAGS+=-Wall -std=c99
 
-OBJECTS=chunky.o \
-	dungen.o \
+OBJECTS=dungen.o \
 	fill.o \
 	life.o \
 	maze.o \
 	noise.o \
 	randomwalk.o \
-	shrinker.o \
+	rooms.o \
         utils.o \
 	voronoi.o \
 	worm.o

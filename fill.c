@@ -61,17 +61,32 @@ void dg_replace_all(dg_dungeon d, enum dg_cell_kind a, enum dg_cell_kind b)
     }
 }
 
-void dg_fill(dg_dungeon d, enum dg_cell_kind k)
+void dg_fill(dg_dungeon d, enum dg_cell_kind fill)
 {
     int i = d->w * d->h;
     while (i--) {
-        d->cells[i].kind = k;
+        d->cells[i].kind = fill;
     }
 
     d->ticks++;
 
     if (d->step_fn) {
         d->step_fn(d, d->ticks);
+    }
+}
+
+void dg_fill_border(dg_dungeon d, int x, int y, int w, int h, enum dg_cell_kind fill)
+{
+    int xi, yi;
+    for (yi=0; yi<h; yi++) {
+        if (yi == 0 || yi == h - 1) {
+            for (xi=0; xi<w; xi++) {
+                dg_set(d, x+xi, y+yi, fill);
+            }
+        } else {
+            dg_set(d, x, y+yi, fill);
+            dg_set(d, x+w-1, y+yi, fill);
+        }
     }
 }
 
