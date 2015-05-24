@@ -8,10 +8,10 @@ static void spacey_eller(dg_dungeon d)
     enum dg_cell_kind *l, *p;
 
     if ((l = malloc(sizeof(enum dg_cell_kind) * d->w)) == NULL) {
-        dg_err("dg_maze: out of memory");
+        dg_panic("dg_maze: out of memory");
     }
     if ((p = malloc(sizeof(enum dg_cell_kind) * d->w)) == NULL) {
-        dg_err("dg_maze: out of memory");
+        dg_panic("dg_maze: out of memory");
     }
 
     for (int i=0; i<d->w; i++) {
@@ -60,7 +60,7 @@ static void move(int *x, int *y, int dir)
         case 1: (*x)++; break;
         case 2: (*y)++; break;
         case 3: --(*x); break;
-        default: dg_err("move: bad direction");
+        default: dg_panic("move: bad direction");
     }
 }
 
@@ -90,7 +90,7 @@ void dg_maze(dg_dungeon d)
     struct point *open;
 
     if ((open = malloc(sizeof(struct point) * d->w * d->h)) == NULL) {
-        dg_err("dg_maze: out of memory");
+        dg_panic("dg_maze: out of memory");
     }
 
     i = 0;
@@ -111,7 +111,7 @@ void dg_maze(dg_dungeon d)
         open[i].x = x;
         open[i].y = y;
     } else {
-        dg_err("dg_maze: didn't find an open starting place");
+        dg_panic("dg_maze: didn't find an open starting place");
     }
 
     while (i >= 0) {

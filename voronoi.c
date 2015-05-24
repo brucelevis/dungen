@@ -17,7 +17,7 @@ static void add_point(struct v_centroid *vc, int x, int y)
         struct point *tmp = realloc(vc->points, sizeof(struct point) * vc->capacity * 2);
 
         if (tmp == NULL) {
-            dg_err("voronoi: out of memory");
+            dg_panic("voronoi: out of memory");
         } else {
             vc->points = tmp;
             vc->capacity *= 2;

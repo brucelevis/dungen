@@ -66,7 +66,7 @@ void dg_free(dg_dungeon d);
  */
 
 /** Display an error message */
-void dg_err(const char *msg);
+void dg_panic(const char *msg);
 
 /** Set an individual cell kind */
 void dg_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind);

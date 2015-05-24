@@ -15,7 +15,7 @@ static struct rect_t *create_rect_t()
     struct rect_t *t;
 
     if ((t = malloc(sizeof(struct rect_t))) == NULL) {
-        dg_err("create_rect_t: out of memory");
+        dg_panic("create_rect_t: out of memory");
     }
 
     t->left = t->right = NULL;
@@ -131,7 +131,7 @@ void dg_chunky(dg_dungeon d)
     struct rect_t *tree;
 
     if ((tree = malloc(sizeof(struct rect_t))) == NULL) {
-        dg_err("dg_chunky: out of memory");
+        dg_panic("dg_chunky: out of memory");
     }
 
     tree->left = tree->right = NULL;

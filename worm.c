@@ -17,7 +17,7 @@ static struct worm *worm_create()
     struct worm *w;
     
     if ((w = malloc(sizeof(struct worm))) == NULL) {
-        dg_err("worm_create: out of memory");
+        dg_panic("worm_create: out of memory");
     }
 
     w->x = 1;

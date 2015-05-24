@@ -8,7 +8,7 @@ dg_dungeon dg_create(int width, int height, dg_render_step step_fn)
     struct dgx_dungeon* d;
 
     if ((d = malloc(sizeof(struct dgx_dungeon))) == NULL) {
-        dg_err("dg_create: out of memory");
+        dg_panic("dg_create: out of memory");
     }
 
     d->w = width;
@@ -19,7 +19,7 @@ dg_dungeon dg_create(int width, int height, dg_render_step step_fn)
 
     d->cells = malloc(sizeof(struct cell) * d->w * d->h);
     if (d->cells == NULL) {
-        dg_err("dg_create: out of memory");
+        dg_panic("dg_create: out of memory");
     }
 
     d->step_fn = step_fn;
@@ -155,7 +155,7 @@ void add_room(dg_dungeon d, struct rect room)
         d->rooms = malloc(sizeof(struct rect_l));
 
         if (d->rooms == NULL) {
-            dg_err("add_room: out of memory");
+            dg_panic("add_room: out of memory");
         }
 
         d->rooms->rect = room;
@@ -168,7 +168,7 @@ void add_room(dg_dungeon d, struct rect room)
         rl->next = malloc(sizeof(struct rect_l));
 
         if (rl->next == NULL) {
-            dg_err("add_room: out of memory");
+            dg_panic("add_room: out of memory");
         }
 
         rl->next->rect = room;
@@ -216,7 +216,7 @@ void carve_room(dg_dungeon d, struct rect rect)
     }
 }
 
-void dg_err(const char *msg)
+void dg_panic(const char *msg)
 {
 #ifdef DG_ERR
     (void)DG_ERR(msg);
