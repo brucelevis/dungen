@@ -3,7 +3,7 @@
 #include "dungen.h"
 #include "lib.h"
 
-static inline int is_alive(enum dg_cell_kind k)
+static int is_alive(enum dg_cell_kind k)
 {
     return k == dg_cell_floor;
 }

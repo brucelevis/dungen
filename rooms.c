@@ -23,7 +23,7 @@ static struct rect_t *create_rect_t()
     return t;
 }
 
-static inline int rnd_midpoint(int v)
+static int rnd_midpoint(int v)
 {
     int split = v / 2;
     int unit = v / SPLIT_LEN;
