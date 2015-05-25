@@ -1,11 +1,9 @@
 #ifndef __DUNGEN_H__
 #define __DUNGEN_H__
 
-/* 0.0.1 */
 #define DUNGEN_VERSION_MAJOR 0
 #define DUNGEN_VERSION_MINOR 0
-#define DUNGEN_VERSION_PATCH 2
-
+#define DUNGEN_VERSION_PATCH 3
 
 #ifdef __cplusplus
 extern "C" {
@@ -98,13 +96,16 @@ void dg_each_neighbor(dg_dungeon d, int x, int y, void *persist, dg_each_neighbo
 
 /**
  * Generators
+ *
+ * The dg_dungeon structure has state such as cell and room information.
+ * Some generators reset this state or use existing state to create new state.
  */
 
 /** Unevenly binary partition dungeon into many rooms
  *
- * ignores any existing state
+ * resets any existing state
  */
-void dg_chunky(dg_dungeon d);
+void dg_rooms_split(dg_dungeon d);
 
 /** Fill with tile
  *

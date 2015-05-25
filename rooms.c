@@ -124,14 +124,15 @@ static void copy_rooms(dg_dungeon d, struct rect_t *t)
     }
 }
 
-void dg_chunky(dg_dungeon d)
+void dg_rooms_split(dg_dungeon d)
 {
+    dg_reset(d);
     seed_rng();
 
     struct rect_t *tree;
 
     if ((tree = malloc(sizeof(struct rect_t))) == NULL) {
-        dg_panic("dg_chunky: out of memory");
+        dg_panic("dg_rooms_split: out of memory");
     }
 
     tree->left = tree->right = NULL;
