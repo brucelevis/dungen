@@ -56,16 +56,16 @@ struct point dir_rnd()
     return p;
 }
 
-void draw_line(dg_dungeon d, int x1, int y1, int x2, int y2)
+void draw_line(dg_dungeon d, int x1, int y1, int x2, int y2, enum dg_cell_kind fill)
 {
 
-    int xd =  abs(x2 - x1);
-    int yd = -abs(y2 - y1);
-    int x_step = x1 < x2 ? 1 : -1;
-    int y_step = y1 < y2 ? 1 : -1;
-    int error = xd + yd;
+    int xd =  abs(x2 - x1),
+        yd = -abs(y2 - y1),
+        x_step = x1 < x2 ? 1 : -1,
+        y_step = y1 < y2 ? 1 : -1,
+        error = xd + yd;
 
-    dg_set(d, x1, y1, dg_cell_floor);
+    dg_set(d, x1, y1, fill);
 
     while (x1 != x2 || y1 != y2) {
         if (2 * error - yd > xd - 2 * error) {
@@ -76,6 +76,7 @@ void draw_line(dg_dungeon d, int x1, int y1, int x2, int y2)
             y1 += y_step;
         }
 
-        CELL_AT(d, x1, y1).kind = dg_cell_floor;
+        dg_set(d, x1, y1, fill);
     }
 }
+

@@ -2,9 +2,7 @@
 #include "lib.h"
 
 struct counts {
-    int floors;
-    int walls;
-    int stones;
+    int floors, walls, stones;
 };
 
 static enum dg_cell_kind count_cell_kind(struct counts *counts)
@@ -92,7 +90,7 @@ static void blur(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
     dg_set(d, x, y, count_cell_kind(&counts));
 }
 
-void rnd_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
+static void rnd_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
 {
     enum dg_cell_kind k =
         rnd_coinflip(0) ?

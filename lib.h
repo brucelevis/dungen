@@ -45,7 +45,7 @@ int rnd_range(int min, int max);
 int rnd_coinflip(int n);
 void dir_change(struct point *p);
 struct point dir_rnd();
-void draw_line(dg_dungeon d, int x1, int y1, int x2, int y2);
+void draw_line(dg_dungeon d, int x1, int y1, int x2, int y2, enum dg_cell_kind fill);
 void add_room(dg_dungeon d, struct rect room);
 void remove_room(dg_dungeon d, struct rect room);
 void carve_room(dg_dungeon d, struct rect rect);

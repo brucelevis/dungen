@@ -4,21 +4,20 @@
 
 void dg_randomwalk(dg_dungeon d)
 {
+    seed_rng();
+
     struct point p, dir;
     p.x = d->w / 2;
     p.y = d->h / 2;
     dir = dir_rnd();
 
-    seed_rng();
-
     int steps = 0;
-    while (++steps < d->generations)
-    {
+    while (++steps < d->generations) {
         dir_change(&dir);
         int x = p.x + dir.x;
         int y = p.y + dir.y;
 
-        /* try a new position until if we are inside the border */
+        /* try a new position until we are inside the border */
         while (x < 1 || y < 1 || x >= (d->w-1) || y >= (d->h-1)) {
             dir_change(&dir);
             x = p.x + dir.x;

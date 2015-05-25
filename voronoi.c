@@ -5,10 +5,8 @@
 #define SIZE 4
 
 struct v_centroid {
-    struct point point;
-    int count;
-    int capacity;
-    struct point *points;
+    struct point point, *points;
+    int count, capacity;
 };
 
 static void add_point(struct v_centroid *vc, int x, int y)
