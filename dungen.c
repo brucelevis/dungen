@@ -62,6 +62,10 @@ void dg_reset(dg_dungeon d)
 
 void dg_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
 {
+    if (x < 0 || y < 0 || x >= d->w || y >= d->h) {
+        dg_panic("dg_set: out of bounds");
+    }
+
     d->ticks++;
 
     CELL_AT(d, x, y).kind = kind;
@@ -73,6 +77,10 @@ void dg_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
 
 enum dg_cell_kind dg_get(dg_dungeon d, int x, int y)
 {
+    if (x < 0 || y < 0 || x >= d->w || y >= d->h) {
+        dg_panic("dg_get: out of bounds");
+    }
+
     return CELL_AT(d, x, y).kind;
 }
 
