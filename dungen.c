@@ -63,7 +63,9 @@ void dg_reset(dg_dungeon d)
 void dg_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
 {
     if (x < 0 || y < 0 || x >= d->w || y >= d->h) {
-        dg_panic("dg_set: out of bounds");
+        char s[100];
+        snprintf(s, sizeof(s), "dg_set: out of bounds (x=%d, y=%d)", x, y);
+        dg_panic(&s[0]);
     }
 
     d->ticks++;
