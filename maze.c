@@ -213,6 +213,8 @@ static void blit_slash(dg_dungeon d, int x, int y, int forward)
 
 void dg_maze_diagonal(dg_dungeon d)
 {
+    seed_rng();
+
     for (int y=0; y < d->h; y+=3) {
         for (int x=0; x < d->w; x+=3) {
             blit_slash(d, x, y, rnd_coinflip(0));
