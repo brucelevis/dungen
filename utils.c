@@ -4,19 +4,19 @@
 #include "lib.h"
 
 #ifdef __APPLE__
-#define rand arc4random
+#define random arc4random
 #endif
+
+#define RND(x) (int)(random() % (long)(x))
 
 void seed_rng()
 {
-#ifndef __APPLE__
-    srand(time(NULL));
-#endif
+    srandom(time(NULL));
 }
 
 int rnd_range(int min, int max)
 {
-    return min + rand() % (max - min);
+    return min + RND(max - min);
 }
 
 int rnd_coinflip(int n)
@@ -24,7 +24,7 @@ int rnd_coinflip(int n)
     int heads;
 
     do {
-        heads = rand() % 2 > 0;
+        heads = RND(2) > 0;
     } while (heads && n--);
 
     return heads;
