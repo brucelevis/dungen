@@ -164,7 +164,7 @@ static void blit_slash(dg_dungeon d, int x, int y, int forward)
         }
 
         /* middle */
-        if (y++ < d->h) {
+        if (++y < d->h) {
             if (x   < d->w) dg_set(d, x,   y, dg_cell_wall);
             if (x+1 < d->w) dg_set(d, x+1, y, dg_cell_floor);
             if (x+2 < d->w) dg_set(d, x+2, y, dg_cell_floor);
@@ -172,7 +172,7 @@ static void blit_slash(dg_dungeon d, int x, int y, int forward)
         }
 
         /* bottom */
-        if (y++ < d->h) {
+        if (++y < d->h) {
             if (x   < d->w) dg_set(d, x,   y, dg_cell_floor);
             if (x+1 < d->w) dg_set(d, x+1, y, dg_cell_floor);
             if (x+2 < d->w) dg_set(d, x+2, y, dg_cell_wall);
@@ -194,7 +194,7 @@ static void blit_slash(dg_dungeon d, int x, int y, int forward)
         }
 
         /* middle */
-        if (y++ < d->h) {
+        if (++y < d->h) {
             if (x   < d->w) dg_set(d, x,   y, dg_cell_wall);
             if (x+1 < d->w) dg_set(d, x+1, y, dg_cell_floor);
             if (x+2 < d->w) dg_set(d, x+2, y, dg_cell_floor);
@@ -202,7 +202,7 @@ static void blit_slash(dg_dungeon d, int x, int y, int forward)
         }
 
         /* bottom */
-        if (y++ < d->h) {
+        if (++y < d->h) {
             if (x   < d->w) dg_set(d, x,   y, dg_cell_wall);
             if (x+1 < d->w) dg_set(d, x+1, y, dg_cell_wall);
             if (x+2 < d->w) dg_set(d, x+2, y, dg_cell_floor);
