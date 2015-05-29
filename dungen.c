@@ -130,7 +130,7 @@ void dg_each_neighbor(dg_dungeon d, int x, int y, void *persist, dg_each_neighbo
     }
 
     /* bottom */
-    if (y < d->h) {
+    if (y < d->h - 1) {
         if (x > 0) {
             fn(d, x-1, y+1, dg_get(d, x-1, y+1), persist);
         }
