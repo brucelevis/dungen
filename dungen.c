@@ -80,7 +80,9 @@ void dg_set(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
 enum dg_cell_kind dg_get(dg_dungeon d, int x, int y)
 {
     if (x < 0 || y < 0 || x >= d->w || y >= d->h) {
-        dg_panic("dg_get: out of bounds");
+        char s[100];
+        snprintf(s, sizeof(s), "dg_get: out of bounds (x=%d, y=%d)", x, y);
+        dg_panic(&s[0]);
     }
 
     return CELL_AT(d, x, y).kind;
@@ -130,7 +132,7 @@ void dg_each_neighbor(dg_dungeon d, int x, int y, void *persist, dg_each_neighbo
     /* bottom */
     if (y < d->h) {
         if (x > 0) {
-            fn(d, x-1, y+1, dg_get(d, x+1, y+1), persist);
+            fn(d, x-1, y+1, dg_get(d, x-1, y+1), persist);
         }
 
         fn(d, x, y+1, dg_get(d, x, y+1), persist);
