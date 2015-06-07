@@ -40,11 +40,11 @@ static const int DIRS[] =
     -1,  1, 0, 1,  1,  1
 };
 
-void seed_rng();
+void seed_rng(void);
 int rnd_range(int min, int max);
 int rnd_coinflip(int n);
 void dir_change(struct point *p);
-struct point dir_rnd();
+struct point dir_rnd(void);
 void draw_line(dg_dungeon d, int x1, int y1, int x2, int y2, enum dg_cell_kind fill);
 void add_room(dg_dungeon d, struct rect room);
 void remove_room(dg_dungeon d, struct rect room);

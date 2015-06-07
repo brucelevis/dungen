@@ -9,7 +9,7 @@
 
 #define RND(x) (int)(random() % (long)(x))
 
-void seed_rng()
+void seed_rng(void)
 {
     srandom(time(NULL));
 }
@@ -41,7 +41,7 @@ void dir_change(struct point *p)
     }
 }
 
-struct point dir_rnd()
+struct point dir_rnd(void)
 {
     struct point p;
 
