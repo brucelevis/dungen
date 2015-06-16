@@ -95,7 +95,7 @@ static void worm_tick(dg_dungeon d, struct worm *w)
 
 void dg_worms(dg_dungeon d)
 {
-    seed_rng();
+    dgx_seed_rng();
 
     struct worm* w = worm_create();
     w->x = d->w >> 1;

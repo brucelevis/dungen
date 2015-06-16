@@ -43,7 +43,7 @@ static int cmp_centroid(const void *a, const void *b)
 
 void dg_voronoi(dg_dungeon d)
 {
-    seed_rng();
+    dgx_seed_rng();
 
     /* create centroids */
     int count = d->w * d->h / (SIZE * SIZE);
@@ -59,8 +59,8 @@ void dg_voronoi(dg_dungeon d)
         vc->count = 0;
         vc->capacity = 4;
         vc->points = malloc(sizeof(struct point) * vc->capacity);
-        vc->point.x = rnd_range(0, d->w);
-        vc->point.y = rnd_range(0, d->h);
+        vc->point.x = dgx_rnd_range(0, d->w);
+        vc->point.y = dgx_rnd_range(0, d->h);
     }
 
     /* sort centroids */

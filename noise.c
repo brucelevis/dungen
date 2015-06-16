@@ -57,7 +57,7 @@ static void noise_smooth(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
                - (x < (d->w - 1) ? 0 : 1);
 
     while (chance--) {
-        collect_counts(d, x, y, (enum dg_cell_kind)rnd_range(0, 3), &counts);
+        collect_counts(d, x, y, (enum dg_cell_kind)dgx_rnd_range(0, 3), &counts);
     }
 
     dg_each_neighbor(d, x, y, &counts, collect_counts);
@@ -83,7 +83,7 @@ static void blur(dg_dungeon d, int x, int y, enum dg_cell_kind kind)
                - (x < (d->w - 1) ? 0 : 1);
 
     while (chance--) {
-        collect_counts(d, x, y, (enum dg_cell_kind)rnd_range(0, 3), &counts);
+        collect_counts(d, x, y, (enum dg_cell_kind)dgx_rnd_range(0, 3), &counts);
     }
 
     /* set the cell to the highest count */

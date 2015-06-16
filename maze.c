@@ -49,7 +49,7 @@ static void spacey_eller(dg_dungeon d)
 
 void dg_forest(dg_dungeon d)
 {
-    seed_rng();
+    dgx_seed_rng();
     spacey_eller(d);
 }
 
@@ -84,7 +84,7 @@ static int odd(int n)
 
 void dg_maze(dg_dungeon d)
 {
-    seed_rng();
+    dgx_seed_rng();
 
     int i, choices, x, y, a, dir, dirs[4];
     struct point *open;
@@ -99,8 +99,8 @@ void dg_maze(dg_dungeon d)
        maze can be quite full, so retry a lot */
     int tries = 100;
     while (tries--) {
-        x = odd(rnd_range(3, d->w-2));
-        y = odd(rnd_range(3, d->h-2));
+        x = odd(dgx_rnd_range(3, d->w-2));
+        y = odd(dgx_rnd_range(3, d->h-2));
 
         if (dg_get(d, x, y) != dg_cell_floor) {
             break;
@@ -128,7 +128,7 @@ void dg_maze(dg_dungeon d)
 
         /* select a random open cell */
         if (choices > 0) {
-            dir = dirs[rnd_range(0, choices)];
+            dir = dirs[dgx_rnd_range(0, choices)];
 
             /* move twice in the same direction, setting the middle cell */
             move(&x, &y, dir);
@@ -213,7 +213,7 @@ static void blit_slash(dg_dungeon d, int x, int y, int forward)
 
 void dg_maze_diagonal(dg_dungeon d)
 {
-    seed_rng();
+    dgx_seed_rng();
 
     for (int y=0; y < d->h; y+=3) {
         for (int x=0; x < d->w; x+=3) {

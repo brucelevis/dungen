@@ -40,8 +40,8 @@ static const int DIRS[] =
     -1,  1, 0, 1,  1,  1
 };
 
-void seed_rng(void);
-int rnd_range(int min, int max);
+void dgx_seed_rng(void);
+int dgx_rnd_range(int min, int max);
 int rnd_coinflip(int n);
 void dir_change(struct point *p);
 struct point dir_rnd(void);

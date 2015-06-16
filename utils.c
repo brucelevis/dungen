@@ -9,12 +9,12 @@
 
 #define RND(x) (int)(random() % (long)(x))
 
-void seed_rng(void)
+void dgx_seed_rng(void)
 {
     srandom(time(NULL));
 }
 
-int rnd_range(int min, int max)
+int dgx_rnd_range(int min, int max)
 {
     return min + RND(max - min);
 }

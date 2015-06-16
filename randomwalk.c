@@ -4,7 +4,7 @@
 
 void dg_randomwalk(dg_dungeon d)
 {
-    seed_rng();
+    dgx_seed_rng();
 
     struct point p, dir;
     p.x = d->w / 2;

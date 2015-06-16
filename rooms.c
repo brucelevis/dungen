@@ -29,7 +29,7 @@ static int rnd_midpoint(int v)
     int unit = v / SPLIT_LEN;
     if (unit == 0) { unit = 1; }
 
-    return rnd_range(split - unit, split + unit * 2);
+    return dgx_rnd_range(split - unit, split + unit * 2);
 }
 
 /* split_rect splits with overlap between the new a & b */
@@ -127,7 +127,7 @@ static void copy_rooms(dg_dungeon d, struct rect_t *t)
 void dg_rooms_split(dg_dungeon d)
 {
     dg_reset(d);
-    seed_rng();
+    dgx_seed_rng();
 
     struct rect_t *tree;
 
