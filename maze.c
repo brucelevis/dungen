@@ -87,11 +87,10 @@ void dg_maze(dg_dungeon d)
     dgx_seed_rng();
 
     int i, choices, x, y, a, dir, dirs[4];
+    struct point points[d->w * d->h];
     struct point *open;
 
-    if ((open = malloc(sizeof(struct point) * d->w * d->h)) == NULL) {
-        dg_panic("dg_maze: out of memory");
-    }
+    open = &points[0];
 
     i = 0;
 
@@ -142,8 +141,6 @@ void dg_maze(dg_dungeon d)
             i--;
         }
     }
-
-    free(open);
 }
 
 static void blit_slash(dg_dungeon d, int x, int y, int forward)
