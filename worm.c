@@ -2,6 +2,10 @@
 #include "dungen.h"
 #include "lib.h"
 
+/* undefined below */
+#define DG_ALLOC malloc
+#define DG_FREE free
+
 struct worm {
     int x;
     int y;
@@ -12,23 +16,39 @@ struct worm {
     struct worm* segment;
 };
 
+static void worm_init(struct worm *worm)
+{
+    worm->x = 0;
+    worm->y = 0;
+    worm->ticks = 0;
+    worm->dead = 0;
+    worm->dir = dir_rnd();
+    worm->segment_depth = 0;
+    worm->segment = NULL;
+}
+
 static struct worm *worm_create()
 {
-    struct worm *w;
-    
-    if ((w = malloc(sizeof(struct worm))) == NULL) {
-        dg_panic("worm_create: out of memory");
+    struct worm *worm;
+
+    worm = DG_ALLOC(sizeof(struct worm));
+    if (worm == NULL) {
+        dg_panic("(internal) worm_create: out of memory");
+    }
+    worm_init(worm);
+
+    return worm;
+}
+
+static void worm_free(struct worm *worm)
+{
+    if (worm->segment != NULL)
+    {
+        worm_free(worm->segment);
     }
 
-    w->x = 1;
-    w->y = 1;
-    w->ticks = 0;
-    w->dead = 0;
-    w->dir = dir_rnd();
-    w->segment_depth = 0;
-    w->segment = NULL;
-
-    return w;
+    DG_FREE(worm);
+    worm = NULL;
 }
 
 static void worm_eat(dg_dungeon d, const struct worm *w)
@@ -124,9 +144,16 @@ void dg_worms(dg_dungeon d)
         }
     }
 
+    /* free use */
+    worm_free(w);
+
     /* final step */
     if (d->step_fn != NULL) {
         d->step_fn(d, steps);
     }
 }
+
+#undef DG_MALLOC
+#undef DG_FREE
+
 
