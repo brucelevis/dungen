@@ -11,7 +11,11 @@
 
 void dgx_seed_rng(void)
 {
-    srandom(time(NULL));
+    static int init = 0;
+    if (!init) {
+        srandom(time(NULL));
+        init = 1;
+    }
 }
 
 int dgx_rnd_range(int min, int max)
