@@ -2,10 +2,6 @@
 #include "dungen.h"
 #include "lib.h"
 
-/* undefined below */
-#define DG_ALLOC malloc
-#define DG_FREE free
-
 struct worm {
     int x;
     int y;
@@ -152,8 +148,4 @@ void dg_worms(dg_dungeon d)
         d->step_fn(d, steps);
     }
 }
-
-#undef DG_MALLOC
-#undef DG_FREE
-
 

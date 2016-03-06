@@ -20,6 +20,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #define DUNGEN_VERSION_MAJOR 0
 #define DUNGEN_VERSION_MINOR 0
 #define DUNGEN_VERSION_PATCH 3
+#define DG_ALLOC malloc
+#define DG_FREE free
 
 #ifdef __cplusplus
 extern "C" {
